@@ -31,8 +31,9 @@ class Index extends Component {
         const donateItems = allItems.filter(item => item.type === 'donate');
         this.setState({
           wishList: wishItems,
+          masterWishList: wishItems,
           donateList: donateItems,
-          masterList: allItems,
+          masterDonateList: donateItems,
         });
       })
       .catch((error) => {
@@ -43,10 +44,10 @@ class Index extends Component {
       });
   }
 
-  onSearchChange = (value) => {
+  searchWishList = (value) => {
     console.log(value);
     const regex = new RegExp(`${value}`.toUpperCase());
-    const itemList = this.state.masterList.filter((item) => {
+    const itemList = this.state.masterWishList.filter((item) => {
       return regex.test(`${item.title}${item.description}`.toUpperCase());
     });
 
@@ -54,15 +55,28 @@ class Index extends Component {
       wishList: itemList,
     })
   }
+
+  searchDonateList = (value) => {
+    console.log(value);
+    const regex = new RegExp(`${value}`.toUpperCase());
+    const itemList = this.state.masterDonateList.filter((item) => {
+      return regex.test(`${item.title}${item.description}`.toUpperCase());
+    });
+
+    this.setState({
+      donateList: itemList,
+    })
+  }
+
   render() {
     return (
       <div>
         <section>
-          <SearchBar onSearchCallback={this.onSearchChange} />
+          <SearchBar onSearchCallback={this.searchWishList} />
           <ItemList items={this.state.wishList} />
         </section>
         <section>
-          <SearchBar onSearchCallback={this.onSearchChange} />
+          <SearchBar onSearchCallback={this.searchDonateList} />
           <ItemList items={this.state.donateList} />
         </section>
       </div>
