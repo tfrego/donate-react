@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import ItemList from './ItemList';
+import SearchBar from './SearchBar';
 
 const URL = 'http://localhost:8080/items/';
 
@@ -9,7 +11,9 @@ class Index extends Component {
     super(props);
 
     this.state = {
-      itemList: [],
+      wishList: [],
+      donateList: [],
+      masterList: [],
     };
   }
 
@@ -17,14 +21,18 @@ class Index extends Component {
     axios.get(URL)
       .then((response) => {
         console.log(response);
-        const items = response.data.map((item) => {
+        const allItems = response.data.map((item) => {
           const newItem = {
             ...item,
           }
           return newItem;
-        })
+        });
+        const wishItems = allItems.filter(item => item.type === 'wish');
+        const donateItems = allItems.filter(item => item.type === 'donate');
         this.setState({
-          itemList: items,
+          wishList: wishItems,
+          donateList: donateItems,
+          masterList: allItems,
         });
       })
       .catch((error) => {
@@ -34,9 +42,30 @@ class Index extends Component {
         })
       });
   }
+
+  onSearchChange = (value) => {
+    console.log(value);
+    const regex = new RegExp(`${value}`.toUpperCase());
+    const itemList = this.state.masterList.filter((item) => {
+      return regex.test(`${item.title}${item.description}`.toUpperCase());
+    });
+
+    this.setState({
+      wishList: itemList,
+    })
+  }
   render() {
     return (
-      <ItemList items={this.state.itemList} />
+      <div>
+        <section>
+          <SearchBar onSearchCallback={this.onSearchChange} />
+          <ItemList items={this.state.wishList} />
+        </section>
+        <section>
+          <SearchBar onSearchCallback={this.onSearchChange} />
+          <ItemList items={this.state.donateList} />
+        </section>
+      </div>
     )
   }
 }
