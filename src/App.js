@@ -18,6 +18,7 @@ class App extends Component {
   componentDidMount() {
     axios.get(URL)
       .then((response) => {
+        console.log(response);
         const items = response.data.map((item) => {
           const newItem = {
             ...item,
