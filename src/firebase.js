@@ -1,13 +1,14 @@
 import firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyDg-k6_xNaZY-8ah4wjbxadEM-3fYSFWmw",
-  authDomain: "trang-donate-app.firebaseapp.com",
-  databaseURL: "https://trang-donate-app.firebaseio.com",
-  projectId: "trang-donate-app",
-  storageBucket: "trang-donate-app.appspot.com",
-  messagingSenderId: "233559537420"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
+
 firebase.initializeApp(config);
 
 export const provider = new firebase.auth.GoogleAuthProvider();
