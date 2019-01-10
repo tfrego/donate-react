@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase, { auth, provider } from './../firebase.js';
 
 import ItemList from './ItemList';
 
 const URL = 'http://localhost:8080/items/';
+// const UID = this.props.user.uid;
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: this.props.user,
       wishList: [],
       donateList: [],
     };
   }
 
   componentDidMount() {
-    axios.get(URL + `offers/5c2fa564a71fa5259385d132`)
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user: user });
+      }
+    });
+
+    console.log('CHECKING USER');
+    console.log(this.state);
+
+    axios.get(URL + `offers/${this.state.user.uid}`)
       .then((response) => {
-        console.log(response);
         const allItems = response.data.map((item) => {
           const newItem = {
             ...item,

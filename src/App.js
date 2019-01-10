@@ -23,7 +23,8 @@ class App extends Component {
       if (user) {
         this.setState({ user });
       }
-      console.log(this.state);
+      console.log("TESTING USER");
+      console.log(this.state.user);
     });
   }
 
