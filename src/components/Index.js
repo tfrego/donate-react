@@ -27,8 +27,8 @@ class Index extends Component {
           }
           return newItem;
         });
-        const wishItems = allItems.filter(item => item.type === 'wish');
-        const donateItems = allItems.filter(item => item.type === 'donate');
+        const wishItems = allItems.filter(item => item.type === 'request');
+        const donateItems = allItems.filter(item => item.type === 'offer');
         this.setState({
           wishList: wishItems,
           masterWishList: wishItems,
