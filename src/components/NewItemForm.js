@@ -64,14 +64,13 @@ class NewItemForm extends Component {
 
     uuidv1();
 
-    fileRef.put(file).then(function(snapshot) {
+    fileRef.put(file).then((snapshot) => {
       console.log('File uploaded!');
-    });
-    //
-    // filePath.getDownloadURL().then(function(downloadUrl) {
-    //   console.log('File available at', downloadUrl);
-    // })
 
+      snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log("File available at", downloadURL);
+      });
+    });
   }
 
   render() {
