@@ -1,3 +1,6 @@
+.App {
+  padding: 3rem 3rem;
+}
 .user-profile {
   border-radius: 50%;
   width: 50px;

@@ -1,0 +1,9 @@
+.item {
+  width: 250px;
+  border: solid;
+  border-width: thin;
+}
+.item img {
+  width: 200px;
+  height: auto;
+}

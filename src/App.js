@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import firebase, { auth, provider } from './firebase.js';
 
-import Index from './components/Index';
+import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
+import NewItemForm from './components/NewItemForm';
 
 import './App.css';
 
@@ -55,27 +56,24 @@ class App extends Component {
         <Router>
           <div>
             <nav>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about/">About</Link></li>
-              </ul>
+              <div><Link to="/">Home</Link></div>
+              <div><Link to="/about/">About</Link></div>
                 {this.state.user ?
-                  <ul>
-                    <li><Link to="/dashboard/">Dashboard</Link></li>
-                    <li><img className="user-profile" src={this.state.user.photoURL} alt="user" /></li>
-                    <li><button onClick={this.logout}>Log Out</button></li>
-                  </ul>
-                :
                   <div>
-                    <button onClick={this.login}>Log In</button>
+                    <Link to="/dashboard/">Dashboard</Link>
+                    <img className="user-profile" src={this.state.user.photoURL} alt="user" />
+                    <button onClick={this.logout}>Log Out</button>
                   </div>
+                :
+                  <button onClick={this.login}>Log In</button>
                 }
             </nav>
-            <Route path='/' exact component={Index} />
+            <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
           </div>
         </Router>
+        <NewItemForm addItemCallback={this.addItem} />
       </div>
     );
   }

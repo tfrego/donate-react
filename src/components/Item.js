@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 import './Item.css';
 
 const Item = (props) => {
-  const { userId, type, title, category, description, qty, status } = props;
+  const { title, description, imageUrl, qty } = props;
   return (
     <div className="item">
-      {userId}
-      {type}
-      {title}
-      {category}
-      {description}
-      {qty}
-      {status}
+      <h4>{title}</h4>
+      <p>{description}</p>
+      {imageUrl ? <img src={imageUrl} alt={title}/> : null }
+      <p>Quantity: {qty}</p>
     </div>
   );
 };

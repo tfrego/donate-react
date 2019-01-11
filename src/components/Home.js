@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 
 const URL = 'http://localhost:8080/items/';
 
-class Index extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -72,10 +72,12 @@ class Index extends Component {
     return (
       <div>
         <section>
+          <h2>Wish List </h2>
           <SearchBar onSearchCallback={this.searchWishList} />
           <ItemList items={this.state.wishList} />
         </section>
         <section>
+          <h2>Items to Gift</h2>
           <SearchBar onSearchCallback={this.searchDonateList} />
           <ItemList items={this.state.donateList} />
         </section>
@@ -84,4 +86,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default Home;

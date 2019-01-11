@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import firebase, { auth, provider } from './../firebase.js';
+import firebase, { auth } from './../firebase';
 
 import ItemList from './ItemList';
 
