@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase, { storage } from './../firebase';
+import firebase from './../firebase';
 
 class NewItemForm extends Component {
   constructor(props) {
@@ -55,12 +55,19 @@ class NewItemForm extends Component {
   uploadHandler = () => {
     console.log(this.state.selectedFile);
     const file = this.state.selectedFile;
-    const filePath = storage.ref().child(this.state.selectedFile.name);
 
-    filePath.put(file).then(function(snapshot) {
+    const storageRef = firebase.storage().ref();
+    const uuidv1 = require('uuid/v1');
+    const uuid = uuidv1();
+    console.log(uuid);
+    const fileRef = storageRef.child(`images/${uuid}/${this.state.selectedFile.name}`)
+
+    uuidv1();
+
+    fileRef.put(file).then(function(snapshot) {
       console.log('File uploaded!');
     });
-    // 
+    //
     // filePath.getDownloadURL().then(function(downloadUrl) {
     //   console.log('File available at', downloadUrl);
     // })
