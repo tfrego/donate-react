@@ -5,7 +5,6 @@ import firebase, { auth, provider } from './firebase.js';
 import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
-import NewItemForm from './components/NewItemForm';
 
 import './App.css';
 
@@ -57,8 +56,6 @@ class App extends Component {
             <nav>
               <div><Link to="/">Home</Link></div>
               <div><Link to="/about/">About</Link></div>
-              <div><Link to="/request/">Create a Wish List</Link></div>
-              <div><Link to="/offer/">Post a Gift</Link></div>
                 {this.state.user ?
                   <div>
                     <Link to="/dashboard/">Dashboard</Link>
@@ -66,13 +63,15 @@ class App extends Component {
                     <button onClick={this.logout}>Log Out</button>
                   </div>
                 :
-                  <button onClick={this.login}>Log In</button>
+                  <div>
+                    <Link to="/dashboard/">Create a Wish List</Link>
+                    <Link to="/dashboard/">Post a Gift</Link>
+                    <button onClick={this.login}>Log In</button>
+                  </div>
                 }
             </nav>
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
-            <Route path='/request/' component={NewItemForm} />
-            <Route path='/offer/' component={NewItemForm} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
           </div>
         </Router>
