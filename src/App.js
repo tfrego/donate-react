@@ -24,8 +24,7 @@ class App extends Component {
       if (user) {
         this.setState({ user });
       }
-      console.log("TESTING USER");
-      console.log(this.state.user);
+      console.log('CURRENT USER', this.state.user);
     });
   }
 
@@ -58,6 +57,8 @@ class App extends Component {
             <nav>
               <div><Link to="/">Home</Link></div>
               <div><Link to="/about/">About</Link></div>
+              <div><Link to="/request/">Create a Wish List</Link></div>
+              <div><Link to="/offer/">Post a Gift</Link></div>
                 {this.state.user ?
                   <div>
                     <Link to="/dashboard/">Dashboard</Link>
@@ -70,10 +71,11 @@ class App extends Component {
             </nav>
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
+            <Route path='/request/' component={NewItemForm} />
+            <Route path='/offer/' component={NewItemForm} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
           </div>
         </Router>
-        <NewItemForm addItemCallback={this.addItem} />
       </div>
     );
   }

@@ -1,39 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import ItemList from './ItemList';
+import RequestList from './RequestList';
+import OfferList from './OfferList';
 import SearchBar from './SearchBar';
 
-const URL = 'http://localhost:8080/items/';
+const URL = 'http://localhost:8080/';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      wishList: [],
-      donateList: [],
-      masterList: [],
+      offerList: [],
+      offerMasterList: [],
+      requestList: [],
+      requestMasterList: [],
     };
   }
 
   componentDidMount() {
-    axios.get(URL)
+    axios.get(URL + 'requests/')
       .then((response) => {
         console.log(response);
-        const allItems = response.data.map((item) => {
+        const items = response.data.map((item) => {
           const newItem = {
             ...item,
           }
           return newItem;
         });
-        const wishItems = allItems.filter(item => item.type === 'request');
-        const donateItems = allItems.filter(item => item.type === 'offer');
         this.setState({
-          wishList: wishItems,
-          masterWishList: wishItems,
-          donateList: donateItems,
-          masterDonateList: donateItems,
+          requestList: items,
+          requestMasterList: items,
         });
       })
       .catch((error) => {
@@ -42,29 +40,50 @@ class Home extends Component {
           errorMessage: error.message,
         })
       });
+    axios.get(URL + 'offers/')
+      .then((response) => {
+        console.log(response);
+        const items = response.data.map((item) => {
+          const newItem = {
+            ...item,
+          }
+          return newItem;
+        });
+        this.setState({
+          offerList: items,
+          offerMasterList: items,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
+
   }
 
-  searchWishList = (value) => {
+  searchRequestList = (value) => {
     console.log(value);
     const regex = new RegExp(`${value}`.toUpperCase());
-    const itemList = this.state.masterWishList.filter((item) => {
+    const itemList = this.state.requestMasterList.filter((item) => {
       return regex.test(`${item.title}${item.description}`.toUpperCase());
     });
 
     this.setState({
-      wishList: itemList,
+      requestList: itemList,
     })
   }
 
-  searchDonateList = (value) => {
+  searchOfferList = (value) => {
     console.log(value);
     const regex = new RegExp(`${value}`.toUpperCase());
-    const itemList = this.state.masterDonateList.filter((item) => {
+    const itemList = this.state.offerMasterList.filter((item) => {
       return regex.test(`${item.title}${item.description}`.toUpperCase());
     });
 
     this.setState({
-      donateList: itemList,
+      offerList: itemList,
     })
   }
 
@@ -73,13 +92,13 @@ class Home extends Component {
       <div>
         <section>
           <h2>Wish List </h2>
-          <SearchBar onSearchCallback={this.searchWishList} />
-          <ItemList items={this.state.wishList} />
+          <SearchBar onSearchCallback={this.searchRequestList} />
+          <RequestList items={this.state.requestList} />
         </section>
         <section>
           <h2>Items to Gift</h2>
-          <SearchBar onSearchCallback={this.searchDonateList} />
-          <ItemList items={this.state.donateList} />
+          <SearchBar onSearchCallback={this.searchOfferList} />
+          <OfferList items={this.state.offerList} />
         </section>
       </div>
     )

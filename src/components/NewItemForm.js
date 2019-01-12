@@ -11,7 +11,7 @@ class NewItemForm extends Component {
       title: '',
       category: '',
       description: '',
-      images: '',
+      imageUrl: '',
       qty: '',
       status: 'active',
       selectedFile: null,
@@ -25,9 +25,10 @@ class NewItemForm extends Component {
       title: '',
       category: '',
       description: '',
-      images: '',
+      imageUrl: '',
       qty: '',
       status: 'active',
+      selectedFile: null,
     });
   }
 
@@ -53,22 +54,23 @@ class NewItemForm extends Component {
   }
 
   uploadHandler = () => {
-    console.log(this.state.selectedFile);
+    console.log(this.state);
+    console.log('Selected file', this.state.selectedFile);
     const file = this.state.selectedFile;
 
     const storageRef = firebase.storage().ref();
     const uuidv1 = require('uuid/v1');
     const uuid = uuidv1();
     console.log(uuid);
-    const fileRef = storageRef.child(`images/${uuid}/${this.state.selectedFile.name}`)
-
-    uuidv1();
+    const fileRef = storageRef.child(`images/${uuid}/${this.state.selectedFile.name}`);
 
     fileRef.put(file).then((snapshot) => {
       console.log('File uploaded!');
 
-      snapshot.ref.getDownloadURL().then(function(downloadURL) {
-        console.log("File available at", downloadURL);
+      snapshot.ref.getDownloadURL().then((downloadUrl) => {
+        console.log('File available at', downloadUrl);
+        this.setState({ imageUrl: downloadUrl.toString() });
+        console.log(this.state);
       });
     });
   }
