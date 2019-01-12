@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Request.css';
 
 const Request = (props) => {
-  const { title, description, images, qty } = props;
+  const { title, description, qty } = props;
   return (
     <div className="request">
       <h4>{title}</h4>
@@ -19,7 +19,6 @@ Request.propTypes = {
   title: PropTypes.string,
   category: PropTypes.string,
   description: PropTypes.string,
-  images: PropTypes.array,
   qty: PropTypes.number,
   status: PropTypes.string,
 }

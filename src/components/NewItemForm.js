@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './../firebase';
+import axios from 'axios';
 
 const CATEGORY_LIST = ['Appliances', 'Arts & Crafts', 'Auto Parts',
                        'Baby & Kids', 'Beauty & Health', 'Books & Magazines',
@@ -69,7 +70,7 @@ class NewItemForm extends Component {
 
       snapshot.ref.getDownloadURL().then((downloadUrl) => {
         console.log('File available at', downloadUrl);
-        this.setState({ images: [downloadUrl.toString()] });
+        this.setState({ images: downloadUrl.toString() });
         console.log(this.state);
       });
     });
