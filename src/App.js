@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import firebase, { auth, provider } from './firebase.js';
+import geolib from 'geolib';
 
 import Home from './components/Home';
 import About from './components/About';
@@ -12,7 +13,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      location: {},
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -46,20 +48,27 @@ class App extends Component {
       });
   }
 
-  checkLocation = () => {
+  getLocation = () => {
     if (navigator.geolocation) {
       console.log('Geolocation is supported!');
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          console.log(position.coords);
-        },
-        function() {
-          alert('Position could not be determined.')
-        },
-        {
-          enableHighAccuracy: true
-        }
-      );
+
+      const geoSuccess = (position) => {
+        console.log('Location', position.coords);
+        this.setState({ location: position.coords });
+        console.log(this.state);
+      }
+
+      navigator.geolocation.getCurrentPosition(geoSuccess)
+      //   function(position) {
+      //     console.log('Location', position.coords);
+      //   },
+      //   function() {
+      //     alert('Position could not be determined.')
+      //   },
+      //   {
+      //     enableHighAccuracy: true
+      //   }
+      // );
     } else {
       console.log('Geolocation is not supported for this Browser/OS.');
     };
@@ -69,7 +78,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Connect and Donate</h1>
-        <button onClick={this.checkLocation}>Check Location</button>
+        <button onClick={this.getLocation}>Get My Location</button>
 
         <Router>
           <div>
