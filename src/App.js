@@ -27,7 +27,7 @@ class App extends Component {
     });
   }
 
-  logout() {
+  logout = () => {
     auth.signOut()
       .then(() => {
         this.setState({
@@ -36,7 +36,7 @@ class App extends Component {
       });
   }
 
-  login() {
+  login = () => {
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
@@ -46,10 +46,30 @@ class App extends Component {
       });
   }
 
+  checkLocation = () => {
+    if (navigator.geolocation) {
+      console.log('Geolocation is supported!');
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          console.log(position.coords);
+        },
+        function() {
+          alert('Position could not be determined.')
+        },
+        {
+          enableHighAccuracy: true
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported for this Browser/OS.');
+    };
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Connect and Donate</h1>
+        <button onClick={this.checkLocation}>Check Location</button>
 
         <Router>
           <div>
