@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import firebase, { auth, provider } from './firebase.js';
 import geolib from 'geolib';
+import axios from 'axios';
 
 import Home from './components/Home';
 import About from './components/About';
@@ -59,26 +60,41 @@ class App extends Component {
       }
 
       navigator.geolocation.getCurrentPosition(geoSuccess)
-      //   function(position) {
-      //     console.log('Location', position.coords);
-      //   },
-      //   function() {
-      //     alert('Position could not be determined.')
-      //   },
-      //   {
-      //     enableHighAccuracy: true
-      //   }
-      // );
     } else {
       console.log('Geolocation is not supported for this Browser/OS.');
     };
   }
+
+  zipCodeFinder = () => {
+    const baseUrl = process.env.REACT_APP_GEOCODING_API_BASE_URL;
+    const appKey = process.env.REACT_APP_GEOCODING_API_KEY;
+    console.log(appKey);
+    const address = '98105';
+
+    axios.get(baseUrl + address + '&key=' + `${appKey}`)
+      .then((response) => {
+        console.log(response);
+        const { lat, lng } = response.data.results[0].geometry.location;
+        console.log(lat, lng);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
+  }
+
 
   render() {
     return (
       <div className="App">
         <h1>Connect and Donate</h1>
         <button onClick={this.getLocation}>Get My Location</button>
+        <div>
+          <input type="text" value="" />
+          <button onClick={this.zipCodeFinder}>Zip Code Locator</button>
+        </div>
 
         <Router>
           <div>

@@ -6,8 +6,7 @@ import RequestList from './RequestList';
 import OfferList from './OfferList';
 import NewItemForm from './NewItemForm';
 
-const URL = 'http://localhost:8080/';
-// const UID = this.props.user.uid;
+const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
 class Dashboard extends Component {
   constructor(props) {
