@@ -4,6 +4,7 @@ import axios from 'axios';
 import RequestList from './RequestList';
 import OfferList from './OfferList';
 import SearchBar from './SearchBar';
+import './Home.css';
 
 const URL = 'http://localhost:8080/';
 
@@ -90,6 +91,13 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <section className="home">
+          <p className="home-text">WANT TO CONNECT WITH A FAMILY IN NEED?</p>
+          <h1>GIFT A WISH</h1>
+          <p className="home-text">Search wish lists created by families and donation centers in your local communities.</p>
+          <p className="home-text">Connect directly with those in need and donate your new and gently used items.</p>
+          <button type="button" className="btn btn-info">Learn More</button>
+        </section>
         <section>
           <h2>Wish List</h2>
           <SearchBar onSearchCallback={this.searchRequestList} />

@@ -8,7 +8,10 @@ import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 
+
 import './App.css';
+
+require("react-bootstrap/lib/NavbarHeader");
 
 class App extends Component {
   constructor() {
@@ -88,41 +91,39 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Gift a Wish</h1>
-        <button type="button" className="btn btn-primary" onClick={this.getLocation}>Get My Location</button>
-        <div>
-          <input type="text" value="" />
-          <button type="button" className="btn btn-primary" onClick={this.zipCodeFinder}>Zip Code Locator</button>
-        </div>
+
+
+        <form className="form-inline">
+        {this.state.user ?
+          <img className="user-profile" src={this.state.user.photoURL} alt="user" />
+        :
+          null
+        }
+          <button className="btn btn-primary" type="button" onClick={this.getLocation}><i class="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
+          <span> or </span>
+          <input className="form-control mr-sm-2" type="text" value="" placeholder="Zip or City, State"/>
+          <button className="btn btn-primary" type="submit" onClick={this.zipCodeFinder}>Go</button>
+        </form>
 
         <Router>
           <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link to="/" className="navbar-brand">Gift A Wish</Link>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div className="collapse navbar-collapse" id="navbarColor03">
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item active">
-                    <Link to="/about/" className="nav-link">About <span className="sr-only">(current)</span></Link>
-                  </li>
-                  {this.state.user ?
-                  <li className="nav-item">
-                    <Link to="/dashboard/" className="nav-link">My Items</Link>
-                    <img className="user-profile" src={this.state.user.photoURL} alt="user" />
-                    <button type="button" className="btn btn-primary" onClick={this.logout}>Log Out</button>
-                  </li>
-                  :
-                  <li className="nav-item">
-                    <Link to="/dashboard/" className="nav-link">Create a Wish List</Link>
-                    <Link to="/dashboard/" className="nav-link">Post a Gift</Link>
-                    <button type="button" className="btn btn-primary" onClick={this.login}>Log In</button>
-                  </li>
-                  }
+            <nav className="navbar navbar-fixed-top">
+              {this.state.user ?
+                <ul className="navbar-nav">
+                  <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
+                  <li className="nav-item"><Link to="/about/" className="nav-link">About</Link></li>
+                  <li className="nav-item"><Link to="/dashboard/" className="nav-link">My Items</Link></li>
+                  <li><button type="button" className="btn btn-info" onClick={this.logout}>LOG OUT</button></li>
                 </ul>
-              </div>
+              :
+                <ul className="navbar-nav">
+                  <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
+                  <li className="nav-item"><Link to="/about/" className="nav-link">About</Link></li>
+                  <li className="nav-item"><Link to="/dashboard/" className="nav-link">Create a Wish List</Link></li>
+                  <li className="nav-item"><Link to="/dashboard/" className="nav-link">Post a Gift</Link></li>
+                  <li><button type="button" className="btn btn-sm btn-info display-4" onClick={this.login}>LOG IN</button></li>
+                </ul>
+                }
             </nav>
 
             <Route path='/' exact component={Home} />
