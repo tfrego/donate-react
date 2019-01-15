@@ -1,20 +1,20 @@
 .home {
-  background-image: url("https://static1.squarespace.com/static/56f5d74cc2ea5119892d8174/587800babf629a8b2a3dda8a/587804bfe6f2e18f68132131/1488385528511/Giving.png?format=1500w");
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ), url("https://static1.squarespace.com/static/56f5d74cc2ea5119892d8174/587800babf629a8b2a3dda8a/587804bfe6f2e18f68132131/1488385528511/Giving.png?format=1500w");
   background-size: cover;
   height: 450px;
-}
-
-.home h1 {
-  color: white;
   text-align: center;
-}
-
-.home btn {
-
+  padding: 10% 20%;
 }
 
 .home-text {
   color: white;
-  text-align: center;
+  margin: 2rem;
+}
 
+.home-text h1 {
+  font-weight: bolder;
 }

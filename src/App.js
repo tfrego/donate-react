@@ -91,9 +91,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-
-        <form className="form-inline">
+        <form className="form-inline form-location">
         {this.state.user ?
           <img className="user-profile" src={this.state.user.photoURL} alt="user" />
         :
