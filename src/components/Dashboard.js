@@ -13,7 +13,8 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      user: this.props.user,
+      // user: this.props.user,
+      user: JSON.parse(localStorage.getItem('authUser')),
       requestList: [],
       offerList: [],
     };
@@ -21,6 +22,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
+      console.log('User', user);
       if (user) {
         this.setState({ user: user });
       }

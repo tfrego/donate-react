@@ -91,13 +91,15 @@ class Home extends Component {
     return (
       <div>
         <section>
-          <h2>Wish List </h2>
+          <h2>Wish List</h2>
           <SearchBar onSearchCallback={this.searchRequestList} />
+          <p>View items most needed by families and donation centers</p>
           <RequestList items={this.state.requestList} />
         </section>
         <section>
-          <h2>Items to Gift</h2>
+          <h2>Donate List</h2>
           <SearchBar onSearchCallback={this.searchOfferList} />
+          <p>View new and gently used items avaiable to be donated</p>
           <OfferList items={this.state.offerList} />
         </section>
       </div>

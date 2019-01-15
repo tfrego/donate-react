@@ -42,10 +42,9 @@ class App extends Component {
   login = () => {
     auth.signInWithPopup(provider)
       .then((result) => {
-        const user = result.user;
-        this.setState({
-          user
-        });
+        const authUser = result.user;
+        this.setState({ user: authUser });
+        localStorage.setItem('user', JSON.stringify(authUser))
       });
   }
 
@@ -89,32 +88,43 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Connect and Donate</h1>
-        <button onClick={this.getLocation}>Get My Location</button>
+        <h1>Gift a Wish</h1>
+        <button type="button" className="btn btn-primary" onClick={this.getLocation}>Get My Location</button>
         <div>
           <input type="text" value="" />
-          <button onClick={this.zipCodeFinder}>Zip Code Locator</button>
+          <button type="button" className="btn btn-primary" onClick={this.zipCodeFinder}>Zip Code Locator</button>
         </div>
 
         <Router>
           <div>
-            <nav>
-              <div><Link to="/">Home</Link></div>
-              <div><Link to="/about/">About</Link></div>
-                {this.state.user ?
-                  <div>
-                    <Link to="/dashboard/">Dashboard</Link>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+              <Link to="/" className="navbar-brand">Gift A Wish</Link>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div className="collapse navbar-collapse" id="navbarColor03">
+                <ul className="navbar-nav mr-auto">
+                  <li className="nav-item active">
+                    <Link to="/about/" className="nav-link">About <span className="sr-only">(current)</span></Link>
+                  </li>
+                  {this.state.user ?
+                  <li className="nav-item">
+                    <Link to="/dashboard/" className="nav-link">My Items</Link>
                     <img className="user-profile" src={this.state.user.photoURL} alt="user" />
-                    <button onClick={this.logout}>Log Out</button>
-                  </div>
-                :
-                  <div>
-                    <Link to="/dashboard/">Create a Wish List</Link>
-                    <Link to="/dashboard/">Post a Gift</Link>
-                    <button onClick={this.login}>Log In</button>
-                  </div>
-                }
+                    <button type="button" className="btn btn-primary" onClick={this.logout}>Log Out</button>
+                  </li>
+                  :
+                  <li className="nav-item">
+                    <Link to="/dashboard/" className="nav-link">Create a Wish List</Link>
+                    <Link to="/dashboard/" className="nav-link">Post a Gift</Link>
+                    <button type="button" className="btn btn-primary" onClick={this.login}>Log In</button>
+                  </li>
+                  }
+                </ul>
+              </div>
             </nav>
+
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
