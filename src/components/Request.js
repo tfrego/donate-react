@@ -13,9 +13,9 @@ const Request = (props) => {
         <h4>{title}</h4>
         <p>Description: {description}</p>
         <p>Quantity: {qty}</p>
-        <p>Posted By:</p><Link to="/user/"><button className="btn btn-primary"> {userName} </button></Link>
+        <p>Posted By:</p><Link to='/user/'><button className="btn btn-primary"> {userName} </button></Link>
       </div>
-      <Route path='/user/' render={() => <User user={userId} />} />
+      <Route path='/user/' render={(props) => <User userId={userId} />} />
     </div>
   );
 };

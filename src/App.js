@@ -151,7 +151,7 @@ class App extends Component {
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
-            <Route path='/user/' component={User} />
+            <Route path='/user/' render={(props) => <User {...props} />} />
           </div>
         </Router>
       </div>
