@@ -1,21 +1,28 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import User from './User';
 import './Request.css';
 
 const Request = (props) => {
-  const { title, description, qty } = props;
+  const { title, description, qty, userName, userId } = props;
   return (
     <div className="request">
-      <h4>{title}</h4>
-      <p>{description}</p>
-      <p>Quantity: {qty}</p>
+      <div>
+        <h4>{title}</h4>
+        <p>Description: {description}</p>
+        <p>Quantity: {qty}</p>
+        <p>Posted By:</p><Link to="/users/"><button className="btn btn-primary"> {userName} </button></Link>
+      </div>
+      <Route path="/users/" component={User} />
     </div>
   );
 };
 
 Request.propTypes = {
   userId: PropTypes.string,
+  userName: PropTypes.string,
   title: PropTypes.string,
   category: PropTypes.string,
   description: PropTypes.string,

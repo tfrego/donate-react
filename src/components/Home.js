@@ -13,7 +13,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      userWishLists: [],
+      requestList: [],
       requestMasterList: [],
       offerList: [],
       offerMasterList: [],
@@ -21,25 +21,6 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get(URL + 'users/requests/')
-      .then((response) => {
-        console.log(response);
-        const users = response.data.map((user) => {
-          const newUser = {
-            ...user,
-          }
-          return newUser;
-        });
-        this.setState({
-          userWishLists: users,
-        });
-      })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({
-          errorMessage: error.message,
-        })
-      });
     axios.get(URL + 'requests/')
       .then((response) => {
         console.log(response);
@@ -50,6 +31,7 @@ class Home extends Component {
           return newItem;
         });
         this.setState({
+          requestList: items,
           requestMasterList: items,
         });
       })
@@ -113,19 +95,19 @@ class Home extends Component {
           <p className="home-text">WANT TO CONNECT WITH A FAMILY IN NEED?</p>
           <h1 className="home-text">GIFT A WISH</h1>
           <p className="home-text">Search wish lists created by families and donation centers in your local communities.
-          Connect directly with those in need and donate your new and gently used items.</p>
+          Connect directly with those in need to donate your new and gently used items.</p>
           <button type="button" className="btn btn-info">LEARN MORE</button>
         </section>
         <section className="lists">
           <h2>Wish Lists</h2>
+          <p>View items needed by families and donation centers</p>
           <SearchBar onSearchCallback={this.searchRequestList} />
-          <p>View items most needed by families and donation centers</p>
           <RequestList items={this.state.requestList} />
         </section>
         <section className="lists">
           <h2>Donate List</h2>
-          <SearchBar onSearchCallback={this.searchOfferList} />
           <p>View new and gently used items avaiable to be donated</p>
+          <SearchBar onSearchCallback={this.searchOfferList} />
           <OfferList items={this.state.offerList} />
         </section>
       </div>

@@ -28,7 +28,7 @@ class SearchBar extends Component {
           onChange={this.onSearchChange}
           value={this.state.searchValue}
           name="search-bar"
-          className="search-bar"
+          className="form-control mr-sm-2 search-bar"
           placeholder="Search Items"
         />
       </section>

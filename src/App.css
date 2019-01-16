@@ -38,11 +38,12 @@ li {
 
 .btn-primary {
   background-color: #D3D3D3;
+  border-color: #D3D3D3;
 }
 
 .btn-primary:hover {
-  background-color: #e96188;
-  border-color: #e96188;
+  background-color: #D3D3D3;
+  border-color: #20c997;
 }
 
 .btn-info:hover {

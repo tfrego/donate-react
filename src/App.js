@@ -7,6 +7,7 @@ import axios from 'axios';
 import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
+import User from './components/User';
 
 
 import './App.css';
@@ -127,6 +128,7 @@ class App extends Component {
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
+            <Route path='/users/' component={User} />
           </div>
         </Router>
       </div>
