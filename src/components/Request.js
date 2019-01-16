@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import User from './User';
+
 import './Request.css';
 
 const Request = (props) => {
@@ -13,9 +13,9 @@ const Request = (props) => {
         <h4>{title}</h4>
         <p>Description: {description}</p>
         <p>Quantity: {qty}</p>
-        <p>Posted By:</p><Link to="/users/"><button className="btn btn-primary"> {userName} </button></Link>
+        <p>Posted By:</p><Link to="/user/"><button className="btn btn-primary"> {userName} </button></Link>
       </div>
-      <Route path="/users/" component={User} />
+      <Route path='/user/' render={() => <User user={userId} />} />
     </div>
   );
 };

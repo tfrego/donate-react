@@ -9,10 +9,7 @@ import About from './components/About';
 import Dashboard from './components/Dashboard';
 import User from './components/User';
 
-
 import './App.css';
-
-require("react-bootstrap/lib/NavbarHeader");
 
 class App extends Component {
   constructor() {
@@ -20,6 +17,7 @@ class App extends Component {
     this.state = {
       user: null,
       location: {},
+      userRequests: null,
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -88,6 +86,31 @@ class App extends Component {
       });
   }
 
+  getUser = (userId) => {
+    const url = process.env.REACT_APP_BACKEND_API_BASE_URL;
+
+    axios.get(url + 'requests/user/' + userId)
+      .then((response) => {
+        console.log(response);
+        const requests = response.data.map((item) => {
+          const newRequest = {
+            ...item,
+          }
+          return newRequest;
+        });
+        this.setState({
+          userRequests: requests,
+        });
+        console.log(this.state);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
+  }
+
 
   render() {
     return (
@@ -98,7 +121,7 @@ class App extends Component {
         :
           null
         }
-          <button className="btn btn-primary" type="button" onClick={this.getLocation}><i class="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
+          <button className="btn btn-primary" type="button" onClick={this.getLocation}><i className="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
           <span> or </span>
           <input className="form-control mr-sm-2" type="text" value="" placeholder="Zip or City, State"/>
           <button className="btn btn-primary" type="submit" onClick={this.zipCodeFinder}>Go</button>
@@ -128,7 +151,7 @@ class App extends Component {
             <Route path='/' exact component={Home} />
             <Route path='/about/' component={About} />
             <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
-            <Route path='/users/' component={User} />
+            <Route path='/user/' component={User} />
           </div>
         </Router>
       </div>

@@ -6,7 +6,7 @@ import OfferList from './OfferList';
 import SearchBar from './SearchBar';
 import './Home.css';
 
-const URL = 'http://localhost:8080/';
+const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
 class Home extends Component {
   constructor(props) {
