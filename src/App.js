@@ -19,8 +19,6 @@ class App extends Component {
       location: {},
       userRequests: null,
     }
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -121,10 +119,10 @@ class App extends Component {
         :
           null
         }
-          <button className="btn btn-primary" type="button" onClick={this.getLocation}><i className="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
-          <span> or </span>
+          <button className="btn btn-info" type="button" onClick={this.getLocation}><i className="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
+          <span>  or  </span>
           <input className="form-control mr-sm-2" type="text" value="" placeholder="Zip or City, State"/>
-          <button className="btn btn-primary" type="submit" onClick={this.zipCodeFinder}>Go</button>
+          <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
         </form>
 
         <Router>
@@ -135,7 +133,7 @@ class App extends Component {
                   <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
                   <li className="nav-item"><Link to="/about/" className="nav-link">About</Link></li>
                   <li className="nav-item"><Link to="/dashboard/" className="nav-link">My Items</Link></li>
-                  <li><button type="button" className="btn btn-info" onClick={this.logout}>LOG OUT</button></li>
+                  <li><button type="button" className="btn btn-primary" onClick={this.logout}>LOG OUT</button></li>
                 </ul>
               :
                 <ul className="navbar-nav">
@@ -143,7 +141,7 @@ class App extends Component {
                   <li className="nav-item"><Link to="/about/" className="nav-link">About</Link></li>
                   <li className="nav-item"><Link to="/dashboard/" className="nav-link">Create a Wish List</Link></li>
                   <li className="nav-item"><Link to="/dashboard/" className="nav-link">Post a Gift</Link></li>
-                  <li><button type="button" className="btn btn-sm btn-info display-4" onClick={this.login}>LOG IN</button></li>
+                  <li><button type="button" className="btn btn-primary" onClick={this.login}>LOG IN</button></li>
                 </ul>
                 }
             </nav>

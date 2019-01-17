@@ -7,9 +7,9 @@ const Offer = (props) => {
   const { title, description, image, qty } = props;
   return (
     <div className="offer">
-      <h4>{title}</h4>
+      <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
       <div className="hovereffect">
-        {image ? <img src={image} alt={title} className="figure-img img-responsive"/> : null }
+        {image ? <img src={image} alt={title} /> : null }
         <div className="overlay">
             <div className="rotate">
                 <p className="group1">
@@ -21,9 +21,9 @@ const Offer = (props) => {
           </div>
         </div>
 
-      <figcaption className="figure-caption">{description}</figcaption>
-      <figcaption className="figure-caption">Quantity: {qty}</figcaption>
-      <button className="btn btn-primary">Connect</button>
+      <p>{description}</p>
+      <p>Quantity: {qty}</p>
+      <button className="btn btn-info">Connect</button>
 
     </div>
   );

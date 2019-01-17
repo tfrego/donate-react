@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase, { auth } from './../firebase';
 
-import RequestList from './RequestList';
-import OfferList from './OfferList';
-import NewItemForm from './NewItemForm';
+import DashboardList from './DashboardList';
+import NewRequestForm from './NewRequestForm';
+import NewOfferForm from './NewOfferForm';
+
+import './Dashboard.css';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
@@ -13,8 +15,8 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      // user: this.props.user,
-      user: JSON.parse(localStorage.getItem('authUser')),
+      user: this.props.user,
+      // user: JSON.parse(localStorage.getItem('authUser')),
       requestList: [],
       offerList: [],
     };
@@ -33,6 +35,7 @@ class Dashboard extends Component {
 
     axios.get(URL + `offers/user/${this.state.user.uid}`)
       .then((response) => {
+        console.log(response.data);
         const items = response.data.map((item) => {
           const newItem = {
             ...item,
@@ -52,6 +55,7 @@ class Dashboard extends Component {
 
     axios.get(URL + `requests/user/${this.state.user.uid}`)
       .then((response) => {
+        console.log(response.data);
         const items = response.data.map((item) => {
           const newItem = {
             ...item,
@@ -94,17 +98,56 @@ class Dashboard extends Component {
       });
   }
 
+  deleteItem = (itemId, type) => {
+    axios.delete(URL + type + "/" + itemId)
+      .then((response) => {
+        console.log(response);
+
+        if (type === "requests") {
+          const requests = this.state.requestList;
+          const request = requests.find((request) => {
+            return request.id === itemId;
+          })
+
+          requests.splice(requests.indexOf(request), 1);
+          this.setState({ requestList: requests})
+
+        } else if (type === "offers") {
+          const offers = this.state.offerList;
+          const offer = offers.find((offer) => {
+            return offer.id === itemId;
+          })
+
+          offers.splice(offers.indexOf(offer), 1);
+          this.setState({ offerList: offers})
+        }
+      })
+      .catch( (error) => {
+        this.setState({
+          errorMessage: `Failure ${error.message}`,
+        })
+      })
+  }
+
   render() {
     return (
       <div>
-        <section>
-          <h2>My Wish List</h2>
-          <RequestList items={this.state.requestList} />
+        <section className="dashboard">
+          <h3>My Wish List</h3>
+          <button>Add New Request</button>
+          <DashboardList
+            items={this.state.requestList}
+            deleteItemCallback={this.deleteItem}
+            type="requests" />
         </section>
-        <section>
-          <h2>My Items to Gift</h2>
-          <OfferList items={this.state.offerList} />
-          <NewItemForm addItemCallback={this.addItem} />
+        <section className="dashboard">
+          <h3>My Items to Donate</h3>
+          <button>Add New Offer</button>
+          <DashboardList
+            items={this.state.offerList}
+            deleteItemCallback={this.deleteItem}
+            type="offers" />
+          <NewOfferForm addItemCallback={this.addItem} />
         </section>
       </div>
     )

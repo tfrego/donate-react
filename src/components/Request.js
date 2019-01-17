@@ -42,10 +42,10 @@ class Request extends Component {
     const { title, description, qty, userName, userId } = this.props;
     return (
       <div className="request">
-        <h4>{title}</h4>
+        <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
         <p>Description: {description}</p>
         <p>Quantity: {qty}</p>
-        <p>Posted By:</p><button className="btn btn-primary" onClick={() => {this.props.selectUserCallback(userId)}}> {userName} </button>
+        <p>Posted By:</p><button className="btn btn-info" onClick={() => {this.props.selectUserCallback(userId)}}> {userName} </button>
       </div>
     )
   }

@@ -5,8 +5,8 @@ const User = (props) => {
   return (
     <div>
       <h4>Meet {name}</h4>
-      <p>{about}</p>
-      <h5>Wish List</h5>
+      <p>About: "{about}"</p>
+      <h5>Wish List:</h5>
 
     </div>
   )

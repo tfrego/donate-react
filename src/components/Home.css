@@ -10,6 +10,10 @@
   padding: 10% 20%;
 }
 
+.lists h2 {
+  color: #e96188;
+}
+
 .home-text {
   color: white;
   margin: 2rem;
@@ -33,5 +37,5 @@
   border-width: thin;
   position: fixed;
   bottom: 50%;
-  right: 40px;
+  right: 25%;
 }

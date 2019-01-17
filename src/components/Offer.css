@@ -1,12 +1,10 @@
 .offer {
-  margin: 1rem 0;
+  margin: 2rem 2rem;
   border: solid;
   border-width: thin;
+  border-color: gray;
   padding: 2rem 2rem;
   width: 310px;
-}
-
-.figure-img {
   border-radius: 5px;
 }
 

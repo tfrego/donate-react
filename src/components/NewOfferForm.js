@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from './../firebase';
-import axios from 'axios';
 
 const CATEGORY_LIST = ['Appliances', 'Arts & Crafts', 'Auto Parts',
                        'Baby & Kids', 'Beauty & Health', 'Books & Magazines',
@@ -8,7 +7,7 @@ const CATEGORY_LIST = ['Appliances', 'Arts & Crafts', 'Auto Parts',
                        'Home & Garden', 'Jewelry & Accessories', 'Musical Instruments',
                        'Pet Supplies', 'Sports & Outdoors']
 
-class NewItemForm extends Component {
+class NewOfferForm extends Component {
   constructor(props) {
     super(props);
 
@@ -108,4 +107,4 @@ class NewItemForm extends Component {
   }
 }
 
-export default NewItemForm;
+export default NewOfferForm;

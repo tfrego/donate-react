@@ -132,7 +132,7 @@ class Home extends Component {
           <h1 className="home-text">GIFT A WISH</h1>
           <p className="home-text">Search wish lists created by families and donation centers in your local communities.
           Connect directly with those in need to donate your new and gently used items.</p>
-          <button type="button" className="btn btn-info">LEARN MORE</button>
+          <button type="button" className="btn btn-primary">LEARN MORE</button>
         </section>
         <section className="lists">
           <h2>Wish Lists</h2>
@@ -148,7 +148,7 @@ class Home extends Component {
             :
               null
             }
-              
+
         </section>
         <section className="lists">
           <h2>Donate List</h2>
