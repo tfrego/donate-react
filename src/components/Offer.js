@@ -8,9 +8,23 @@ const Offer = (props) => {
   return (
     <div className="offer">
       <h4>{title}</h4>
-      <p>{description}</p>
-      {image ? <img src={image} alt={title}/> : null }
-      <p>Quantity: {qty}</p>
+      <div className="hovereffect">
+        {image ? <img src={image} alt={title} className="figure-img img-responsive"/> : null }
+        <div className="overlay">
+            <div className="rotate">
+                <p className="group1">
+                    <a href="#">
+                        <i className="far fa-envelope-open"></i>
+                    </a>
+                </p>
+            </div>
+          </div>
+        </div>
+
+      <figcaption className="figure-caption">{description}</figcaption>
+      <figcaption className="figure-caption">Quantity: {qty}</figcaption>
+      <button className="btn btn-primary">Connect</button>
+
     </div>
   );
 };

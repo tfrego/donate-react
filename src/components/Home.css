@@ -22,3 +22,16 @@
 .lists {
   margin: 2rem 2rem;
 }
+
+.user-details {
+  width: 300px;
+  padding: 1rem 1rem;
+  background-color: white;
+  opacity: .75;
+  border: solid;
+  border-radius: 10px;
+  border-width: thin;
+  position: fixed;
+  bottom: 50%;
+  right: 40px;
+}

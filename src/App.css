@@ -46,14 +46,14 @@ li {
   border-color: #20c997;
 }
 
-.btn-info:hover {
-  opacity: .75;
-  background-color: #D51C38;
+.btn-info {
+  background-color: #e96188;
   border-color: #e96188;
 }
 
-.btn-info {
-  background-color: #e96188;
+.btn-info:hover {
+  opacity: .75;
+  background-color: #D51C38;
   border-color: #e96188;
 }
 
