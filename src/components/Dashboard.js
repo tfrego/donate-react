@@ -169,7 +169,7 @@ class Dashboard extends Component {
       <div>
         <section className="dashboard">
           <h3>My Wish List</h3>
-          <button onClick={this.newWish}>Add a Wish</button>
+          <button onClick={this.newWish} className="btn btn-primary">Add a Wish</button>
           {this.state.newRequest ?
             <NewRequestForm addItemCallback={this.addRequest} />
           :
@@ -182,7 +182,7 @@ class Dashboard extends Component {
         </section>
         <section className="dashboard">
           <h3>My Items to Donate</h3>
-          <button onClick={this.newGift}>Add Item to Donate</button>
+          <button onClick={this.newGift} className="btn btn-primary">Add Item to Donate</button>
           {this.state.newOffer ?
             <NewOfferForm addItemCallback={this.addOffer} />
           :

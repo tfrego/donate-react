@@ -19,7 +19,7 @@ const DashboardItem = (props) => {
 
   return (
     <div className="dashboard-item">
-        <h3>{title}</h3>
+        <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
         <p>Category: {category}</p>
         <p>Description: {description}</p>
         <p>Quantity: {qty}</p>
@@ -28,9 +28,23 @@ const DashboardItem = (props) => {
         <button className="btn btn-outline-danger" onClick={() => props.deleteItemCallback(id, type)}>Delete</button>
 
       {itemMatches ?
-        <div>
-          Matches:
-          {itemMatches}
+        <div className="matches">
+          <h4>Matches:</h4>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Image</th>
+                <th scope="col">User</th>
+                <th scope="col">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {itemMatches}
+            </tbody>
+          </table>
         </div>
       :
         null
