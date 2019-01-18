@@ -6,12 +6,17 @@ import MatchesList from './MatchesList';
 
 const DashboardItem = (props) => {
   const { id, title, category, description, image, qty, matches, type } = props;
-  const itemMatches = matches.map((item) => {
-    const newItem = {
-      ...item,
-    }
-    return newItem;
-  });
+
+  let itemMatches = null;
+
+  if (matches !== [] || matches) {
+    itemMatches = matches.map((item) => {
+      const newItem = {
+        ...item,
+      }
+      return newItem;
+    });
+  }
 
   return (
     <tbody>
@@ -26,9 +31,9 @@ const DashboardItem = (props) => {
           <button className="btn btn-outline-danger" onClick={() => props.deleteItemCallback(id, type)}>Delete</button>
         </td>
       </tr>
-      {itemMatches[0] ?
+      {itemMatches ?
         <tr>
-          <h4>Matches:</h4>
+          <p>Matches:</p>
           <MatchesList items={itemMatches} />
         </tr>
       :

@@ -152,7 +152,7 @@ class Home extends Component {
         </section>
         <section className="lists">
           <h2>Donate List</h2>
-          <p>View new and gently used items avaiable to be donated</p>
+          <p>View new and gently used items available to be donated</p>
           <SearchBar onSearchCallback={this.searchOfferList} />
           <OfferList items={this.state.offerList} />
         </section>

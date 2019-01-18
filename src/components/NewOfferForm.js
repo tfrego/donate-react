@@ -15,7 +15,7 @@ class NewOfferForm extends Component {
       title: '',
       category: '',
       description: '',
-      images: [],
+      image: '',
       qty: '',
       selectedFile: null,
     };
@@ -26,7 +26,7 @@ class NewOfferForm extends Component {
       title: '',
       category: '',
       description: '',
-      images: [],
+      image: '',
       qty: '',
       selectedFile: null,
     });
@@ -39,21 +39,17 @@ class NewOfferForm extends Component {
     const updatedState = {};
     updatedState[field] = value;
     this.setState(updatedState);
+    console.log(this.state);
   }
 
-  onSubmit = (event) => {
-    event.preventDefault();
-    console.log(event);
-    this.props.addItemCallback(this.state);
-    this.resetState();
-  }
 
   fileChangedHandler = (event) => {
     console.log(event.target.files[0]);
     this.setState({selectedFile: event.target.files[0]});
+    console.log(this.state);
   }
 
-  uploadHandler = () => {
+  uploadHandler = (event) => {
     console.log(this.state);
     console.log('Selected file', this.state.selectedFile);
     const file = this.state.selectedFile;
@@ -69,25 +65,31 @@ class NewOfferForm extends Component {
 
       snapshot.ref.getDownloadURL().then((downloadUrl) => {
         console.log('File available at', downloadUrl);
-        this.setState({ images: downloadUrl.toString() });
+        this.setState({ image: downloadUrl.toString() });
         console.log(this.state);
       });
     });
+
+    event.preventDefault();
+    console.log(event);
+    this.props.addItemCallback(this.state);
+    this.resetState();
+
   }
 
   render() {
     return (
       <form onSubmit={this.onSubmit} name="new-item-form" id="new-item-form">
         <div>
+          <label className="new-item-form--label" htmlFor="title">Title</label>
+          <input name="title" placeholder="title" onChange={this.onFormChange} value={this.state.title} />
+        </div>
+        <div>
           <label className="new-item-form--label" htmlFor="category">Category</label>
           <select name="category" placeholder="select" onChange={this.onFormChange} value={this.state.category}>
             <option value="" defaultValue disabled>Please select</option>
             {CATEGORY_LIST.map((value, index) => <option key={index} value={value}>{value}</option>)}
           </select>
-        </div>
-        <div>
-          <label className="new-item-form--label" htmlFor="title">Title</label>
-          <input name="title" placeholder="title" onChange={this.onFormChange} value={this.state.title} />
         </div>
         <div>
           <label className="new-item-form--label" htmlFor="description">Description</label>
@@ -101,7 +103,6 @@ class NewOfferForm extends Component {
           <input type="file" onChange={this.fileChangedHandler} />
           <button onClick={this.uploadHandler}>Upload</button>
         </div>
-        <input type="submit" name="submit" value="Post Item to Gift" />
       </form>
     );
   }

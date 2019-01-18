@@ -69,12 +69,12 @@ li {
 }
 
 .btn-outline-danger {
-  border-color: #FF7851;
-  color: #FF7851;
+  border-color: #e96188;
+  color: #e96188;
 }
 
 .btn-outline-danger:hover {
-  background-color: #FF7851;
+  background-color: #e96188;
   color: white;
 }
 

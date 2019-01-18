@@ -19,6 +19,8 @@ class Dashboard extends Component {
       // user: JSON.parse(localStorage.getItem('authUser')),
       requestList: [],
       offerList: [],
+      newRequest: false,
+      newOffer: false,
     };
   }
 
@@ -74,22 +76,55 @@ class Dashboard extends Component {
       });
   }
 
-  addItem = (newItem) => {
+  newWish = () => {
+    this.setState({newRequest: true});
+  }
+
+  newGift = () => {
+    this.setState({newOffer: true});
+  }
+
+  addRequest = (newItem) => {
     console.log(newItem);
     const apiPayLoad = {
       ...newItem,
       userId: this.state.user.uid,
       status: 'active',
     };
+    axios.post(URL + `requests/`, apiPayLoad)
+      .then((response) => {
+        console.log('API RESPONSE SUCCESS', response);
+        const { requestList } = this.state;
+        requestList.push(newItem);
+        this.setState({
+          requestList: requestList,
+          newRequest: false,
+         });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
+  }
+
+  addOffer = (newItem) => {
+    console.log(newItem);
+    const apiPayLoad = {
+      ...newItem,
+      userId: this.state.user.uid,
+      userName: this.state.user.displayName,
+      status: 'active',
+    };
     axios.post(URL + `offers/`, apiPayLoad)
       .then((response) => {
         console.log('API RESPONSE SUCCESS', response);
-
         const { offerList } = this.state;
-
         offerList.push(newItem);
-
-        this.setState({ offerList });
+        this.setState({
+          offerList: offerList,
+          newOffer: false,
+         });
       })
       .catch((error) => {
         this.setState({
@@ -134,7 +169,12 @@ class Dashboard extends Component {
       <div>
         <section className="dashboard">
           <h3>My Wish List</h3>
-          <button>Add New Request</button>
+          <button onClick={this.newWish}>Add a Wish</button>
+          {this.state.newRequest ?
+            <NewRequestForm addItemCallback={this.addRequest} />
+          :
+            null
+          }
           <DashboardList
             items={this.state.requestList}
             deleteItemCallback={this.deleteItem}
@@ -142,12 +182,16 @@ class Dashboard extends Component {
         </section>
         <section className="dashboard">
           <h3>My Items to Donate</h3>
-          <button>Add New Offer</button>
+          <button onClick={this.newGift}>Add Item to Donate</button>
+          {this.state.newOffer ?
+            <NewOfferForm addItemCallback={this.addOffer} />
+          :
+            null
+          }
           <DashboardList
             items={this.state.offerList}
             deleteItemCallback={this.deleteItem}
             type="offers" />
-          <NewOfferForm addItemCallback={this.addItem} />
         </section>
       </div>
     )
