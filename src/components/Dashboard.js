@@ -3,8 +3,7 @@ import axios from 'axios';
 import firebase, { auth } from './../firebase';
 
 import DashboardList from './DashboardList';
-import NewRequestForm from './NewRequestForm';
-import NewOfferForm from './NewOfferForm';
+import ItemForm from './ItemForm';
 
 import './Dashboard.css';
 
@@ -15,7 +14,6 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      // user: this.props.user,
       user: JSON.parse(localStorage.getItem('user')),
       requestList: [],
       offerList: [],
@@ -76,19 +74,20 @@ class Dashboard extends Component {
       });
   }
 
-  newWish = () => {
-    this.setState({newRequest: true});
-  }
+  newWish = () => this.setState({newRequest: true});
 
-  newGift = () => {
-    this.setState({newOffer: true});
-  }
+  newGift = () => this.setState({newOffer: true});
+
+  onCancelRequest = () => this.setState({newRequest: false});
+
+  onCancelOffer = () => this.setState({newOffer: false});
 
   addRequest = (newItem) => {
     console.log(newItem);
     const apiPayLoad = {
       ...newItem,
       userId: this.state.user.uid,
+      userName: this.state.user.displayName,
       status: 'active',
     };
     axios.post(URL + `requests/`, apiPayLoad)
@@ -171,7 +170,10 @@ class Dashboard extends Component {
           <h3>My Wish List</h3>
           <button onClick={this.newWish} className="btn btn-primary">Add a Wish</button>
           {this.state.newRequest ?
-            <NewRequestForm addItemCallback={this.addRequest} />
+            <ItemForm
+              postItemCallback={this.addRequest}
+              cancelFormCallback={this.onCancelRequest}
+              type="requests" />
           :
             null
           }
@@ -184,7 +186,10 @@ class Dashboard extends Component {
           <h3>My Items to Donate</h3>
           <button onClick={this.newGift} className="btn btn-primary">Add Item to Donate</button>
           {this.state.newOffer ?
-            <NewOfferForm addItemCallback={this.addOffer} />
+            <ItemForm
+              postItemCallback={this.addOffer}
+              cancelFormCallback={this.onCancelOffer}
+              type="offers" />
           :
             null
           }

@@ -7,31 +7,19 @@ const CATEGORY_LIST = ['Appliances', 'Arts & Crafts', 'Auto Parts',
                        'Home & Garden', 'Jewelry & Accessories', 'Musical Instruments',
                        'Pet Supplies', 'Sports & Outdoors']
 
-class EditItemForm extends Component {
+class ItemForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: this.props.id,
       type: this.props.type,
-      title: this.props.title,
-      category: this.props.category,
-      description: this.props.description,
-      image: this.props.image,
-      qty: this.props.qty,
-      selectedFile: this.props.selectedFile,
-    };
-  }
-
-  resetState = () => {
-    this.setState({
-      title: '',
-      category: '',
-      description: '',
+      title: this.props.title || '',
+      category: this.props.category || '',
+      description: this.props.description || '',
       image: '',
-      qty: '',
+      qty: this.props.qty || '',
       selectedFile: null,
-    });
+    };
   }
 
   onFormChange = (event) => {
@@ -57,24 +45,27 @@ class EditItemForm extends Component {
     console.log('Selected file', this.state.selectedFile);
     const file = this.state.selectedFile;
 
-    const storageRef = firebase.storage().ref();
-    const uuidv1 = require('uuid/v1');
-    const uuid = uuidv1();
-    console.log(uuid);
-    const fileRef = storageRef.child(`images/${uuid}/${this.state.selectedFile.name}`);
+    if (file) {
+      const storageRef = firebase.storage().ref();
+      const uuidv1 = require('uuid/v1');
+      const uuid = uuidv1();
+      console.log(uuid);
+      const fileRef = storageRef.child(`images/${uuid}/${this.state.selectedFile.name}`);
 
-    fileRef.put(file).then((snapshot) => {
-      console.log('File uploaded!');
+      fileRef.put(file).then((snapshot) => {
+        console.log('File uploaded!');
 
-      snapshot.ref.getDownloadURL().then((downloadUrl) => {
-        console.log('File available at', downloadUrl);
-        this.setState({ image: downloadUrl.toString() });
-        console.log(this.state);
+        snapshot.ref.getDownloadURL().then((downloadUrl) => {
+          console.log('File available at', downloadUrl);
+          this.setState({ image: downloadUrl.toString() });
+          console.log(this.state);
 
-        this.props.editItemCallback(this.state);
-        this.resetState();
+          this.props.postItemCallback(this.state);
+        });
       });
-    });
+    } else {
+      this.props.postItemCallback(this.state);
+    }
   }
 
   render() {
@@ -99,13 +90,20 @@ class EditItemForm extends Component {
           <label className="new-item-form--label" htmlFor="qty">Quantity</label>
           <input name="qty" placeholder="qty" onChange={this.onFormChange} value={this.state.qty} />
         </div>
+        {this.state.type === "offers" ?
+          <div>
+            <input type="file" onChange={this.fileChangedHandler} />
+          </div>
+        :
+          null
+        }
         <div>
-          <input type="file" onChange={this.fileChangedHandler} />
-        </div>
           <input type="submit" name="submit" value="Submit"/>
+          <button type="button" onClick={() => this.props.cancelFormCallback()}>Cancel</button>
+        </div>
       </form>
     );
   }
 }
 
-export default EditItemForm;
+export default ItemForm;

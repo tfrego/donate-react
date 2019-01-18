@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Match from './Match';
-import EditItemForm from './EditItemForm';
+import ItemForm from './ItemForm';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
@@ -21,6 +21,10 @@ class DashboardItem extends Component {
     this.setState({ editItem: true });
   }
 
+  onCancelClick = () => {
+    this.setState({ editItem: false });
+  }
+
   editItem = (item) => {
     console.log(item)
     const apiPayLoad = {
@@ -29,7 +33,7 @@ class DashboardItem extends Component {
       userName: this.state.user.displayName,
       status: 'active',
     };
-    axios.put(URL + item.type + "/" + item.id, apiPayLoad)
+    axios.put(URL + item.type + "/" + this.props.id, apiPayLoad)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -65,7 +69,10 @@ class DashboardItem extends Component {
           <button className="btn btn-outline-info" onClick={this.onEditClick}>Edit</button>
           <button className="btn btn-outline-danger" onClick={() => this.props.deleteItemCallback(id, type)}>Delete</button>
           {this.state.editItem ?
-            <EditItemForm {...this.props} editItemCallback={this.editItem}  />
+            <ItemForm
+              postItemCallback={this.editItem}
+              cancelFormCallback={this.onCancelClick}
+              {...this.props}   />
           :
             null
           }
