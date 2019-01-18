@@ -15,8 +15,8 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      user: this.props.user,
-      // user: JSON.parse(localStorage.getItem('authUser')),
+      // user: this.props.user,
+      user: JSON.parse(localStorage.getItem('user')),
       requestList: [],
       offerList: [],
       newRequest: false,

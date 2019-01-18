@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import firebase, { auth, provider } from './firebase.js';
 import geolib from 'geolib';
 import axios from 'axios';
@@ -33,9 +33,9 @@ class App extends Component {
   logout = () => {
     auth.signOut()
       .then(() => {
-        this.setState({
-          user: null
-        });
+        this.setState({ user: null });
+        localStorage.setItem('user', null);
+
       });
   }
 
@@ -45,6 +45,7 @@ class App extends Component {
         const authUser = result.user;
         this.setState({ user: authUser });
         localStorage.setItem('user', JSON.stringify(authUser))
+        console.log(authUser);
       });
   }
 
