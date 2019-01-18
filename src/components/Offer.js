@@ -6,8 +6,8 @@ import './Offer.css';
 const Offer = (props) => {
   const { title, description, image, qty } = props;
   return (
-    <div className="offer">
-      <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
+    <div className="offer card mb-3">
+      <h4 class="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
       <div className="hovereffect">
         {image ? <img src={image} alt={title} /> : null }
         <div className="overlay">
@@ -21,8 +21,8 @@ const Offer = (props) => {
           </div>
         </div>
 
-      <p>{description}</p>
-      <p>Quantity: {qty}</p>
+      <p className="card-text">{description}</p>
+      <p className="card-text">Quantity: {qty}</p>
       <button className="btn btn-info">Connect</button>
 
     </div>

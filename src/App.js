@@ -71,7 +71,7 @@ class App extends Component {
     console.log(appKey);
     const address = '98105';
 
-    axios.get(baseUrl + address + '&key=' + `${appKey}`)
+    axios.get(baseUrl + address + '&key=' + appKey)
       .then((response) => {
         console.log(response);
         const { lat, lng } = response.data.results[0].geometry.location;
