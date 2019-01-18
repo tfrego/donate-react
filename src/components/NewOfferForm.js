@@ -49,7 +49,8 @@ class NewOfferForm extends Component {
     console.log(this.state);
   }
 
-  uploadHandler = (event) => {
+  onSubmit = (event) => {
+    event.preventDefault();
     console.log(this.state);
     console.log('Selected file', this.state.selectedFile);
     const file = this.state.selectedFile;
@@ -67,14 +68,11 @@ class NewOfferForm extends Component {
         console.log('File available at', downloadUrl);
         this.setState({ image: downloadUrl.toString() });
         console.log(this.state);
+
+        this.props.addItemCallback(this.state);
+        this.resetState();
       });
     });
-
-    event.preventDefault();
-    console.log(event);
-    this.props.addItemCallback(this.state);
-    this.resetState();
-
   }
 
   render() {
@@ -101,8 +99,8 @@ class NewOfferForm extends Component {
         </div>
         <div>
           <input type="file" onChange={this.fileChangedHandler} />
-          <button onClick={this.uploadHandler}>Upload</button>
         </div>
+          <input type="submit" name="submit" value="Submit"/>
       </form>
     );
   }

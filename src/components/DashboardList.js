@@ -14,19 +14,9 @@ const DashboardList = (props) => {
   });
 
   return (
-    <table className="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Category</th>
-          <th scope="col">Description</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Image</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
+    <div>
       {itemList}
-    </table>
+    </div>
   )
 }
 

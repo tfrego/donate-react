@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 const Match = (props) => {
   const { title, description, image, qty, userName } = props;
   return (
-    <tr>
-      <p>Title: {title.charAt(0).toUpperCase() + title.slice(1)}</p>
-      {image ? <img src={image} alt={title} /> : null }
-      <p>Description: {description}</p>
-      <p>Quantity: {qty}</p>
-      <p>Posted By: {userName} </p>
-      <button className="btn btn-info">Connect</button>
-    </tr>
+      <ul>
+        <li>Title: {title.charAt(0).toUpperCase() + title.slice(1)}</li>
+        <li>{image ? <img src={image} alt={title} /> : null }</li>
+        <li>Description: {description}</li>
+        <li>Quantity: {qty}</li>
+        <li>Posted By: {userName}</li>
+      </ul>
   );
 };
 

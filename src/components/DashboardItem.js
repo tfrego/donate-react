@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MatchesList from './MatchesList';
+import Match from './Match';
 
 // import './DashboardOffer.css';
 
@@ -9,37 +9,33 @@ const DashboardItem = (props) => {
 
   let itemMatches = null;
 
-  if (matches !== [] || matches) {
+  if (matches !== [] && matches !== undefined) {
     itemMatches = matches.map((item) => {
-      const newItem = {
-        ...item,
-      }
-      return newItem;
+      return <Match key={item.id}
+              {...item} />
     });
-  }
+  };
+
 
   return (
-    <tbody>
-      <tr>
-        <td>{title}</td>
-        <td>{category}</td>
-        <td>{description}</td>
-        <td>{qty}</td>
-        <td>{image ? <img src={image} alt={title} className="dashboard-img" /> : null }</td>
-        <td>
-          <button className="btn btn-outline-info">Edit</button>
-          <button className="btn btn-outline-danger" onClick={() => props.deleteItemCallback(id, type)}>Delete</button>
-        </td>
-      </tr>
+    <div className="dashboard-item">
+        <h3>{title}</h3>
+        <p>Category: {category}</p>
+        <p>Description: {description}</p>
+        <p>Quantity: {qty}</p>
+        {image ? <img src={image} alt={title} className="dashboard-img" /> : null }
+        <button className="btn btn-outline-info">Edit</button>
+        <button className="btn btn-outline-danger" onClick={() => props.deleteItemCallback(id, type)}>Delete</button>
+
       {itemMatches ?
-        <tr>
-          <p>Matches:</p>
-          <MatchesList items={itemMatches} />
-        </tr>
+        <div>
+          Matches:
+          {itemMatches}
+        </div>
       :
         null
       }
-    </tbody>
+    </div>
   );
 };
 
