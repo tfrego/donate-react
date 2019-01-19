@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom';
 import firebase, { auth, provider } from './firebase.js';
 import geolib from 'geolib';
 import axios from 'axios';
@@ -146,11 +146,12 @@ class App extends Component {
                 </ul>
                 }
             </nav>
-
-            <Route path='/' exact component={Home} />
-            <Route path='/about/' component={About} />
-            <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
-            <Route path='/user/' render={(props) => <User {...props} />} />
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/about/' component={About} />
+              <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
+              <Route path="/:user" component={User} />
+            </Switch>
           </div>
         </Router>
       </div>
