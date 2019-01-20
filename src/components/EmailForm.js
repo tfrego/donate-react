@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './EmailForm.css';
 
 class EmailForm extends Component {
   constructor(props) {
@@ -21,35 +22,26 @@ class EmailForm extends Component {
 
   render() {
     return (
-      <form id="contact-form">
+      <form className="email-form" id="contact-form">
         <input type="hidden" name="contact_number" />
+        <input type="hidden" name="to_email" value="trang.frego@gmail.com"/>
 
         <div className="form-group">
-          <label htmlFor="name">From Name</label>
-          <input className="form-control" type="text" name="user_name" />
+          <label htmlFor="subject">Subject</label>
+          <input className="form-control" type="text" name="subject" />
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">To Name</label>
-          <input className="form-control" type="text" name="recipient_name" />
+          <label htmlFor="from_email">From Email</label>
+          <input className="form-control" type="text" name="from_email" />
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">From Email</label>
-          <input className="form-control" type="text" name="user_email" />
+          <label htmlFor="message">Message</label>
+          <textarea className="form-control" rows="4" name="message"/>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="email">To Email</label>
-          <input className="form-control" type="text" name="recipient_email" />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Message</label>
-          <textarea className="form-control" />
-        </div>
-
-        <input type="submit" value="Send" />
+        <button type="submit" className="btn btn-primary"> Send </button>
       </form>
 
     )
