@@ -11,13 +11,13 @@ const Offer = (props) => {
 
   return (
     <div className="offer card mb-3">
-      <h4 class="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
+      <h4 className="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
       <div className="hovereffect">
         {image ? <img src={image} alt={title} /> : null }
         <div className="overlay">
             <div className="rotate">
                 <p className="group1">
-                    <Link to={`/${userId}`}>
+                    <Link to={`/email/${userId}`}>
                         <i className="far fa-envelope-open"></i>
                     </Link>
                 </p>

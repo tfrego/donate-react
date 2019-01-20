@@ -18,6 +18,7 @@ class App extends Component {
     this.state = {
       user: null,
       location: {},
+      zipCode: '',
       userRequests: null,
     }
   }
@@ -55,7 +56,7 @@ class App extends Component {
       console.log('Geolocation is supported!');
 
       const geoSuccess = (position) => {
-        console.log('Location', position.coords);
+        console.log('Location', position);
         this.setState({ location: position.coords });
         console.log(this.state);
       }
@@ -66,17 +67,19 @@ class App extends Component {
     };
   }
 
-  zipCodeFinder = () => {
+  zipCodeFinder = (event) => {
+    event.preventDefault();
     const baseUrl = process.env.REACT_APP_GEOCODING_API_BASE_URL;
     const appKey = process.env.REACT_APP_GEOCODING_API_KEY;
-    console.log(appKey);
-    const address = '98105';
+
+    const address = this.state.zipCode;
 
     axios.get(baseUrl + address + '&key=' + appKey)
       .then((response) => {
         console.log(response);
         const { lat, lng } = response.data.results[0].geometry.location;
         console.log(lat, lng);
+        this.setState({ location: response.data.results[0].geometry.location});
       })
       .catch((error) => {
         console.log(error.message);
@@ -111,6 +114,16 @@ class App extends Component {
       });
   }
 
+  onFormChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const updatedState = {};
+    updatedState[field] = value;
+    this.setState(updatedState);
+    console.log(this.state);
+  }
+
 
   render() {
     return (
@@ -121,9 +134,9 @@ class App extends Component {
         :
           null
         }
-          <button className="btn btn-info" type="button" onClick={this.getLocation}><i className="fa fa-map-marker" aria-hidden="true"></i> Find My Location</button>
+          <button className="btn btn-info" type="button" onClick={this.getLocation}><i className="fa fa-map-marker"></i> Find My Location</button>
           <span>  or  </span>
-          <input className="form-control mr-sm-2" type="text" value="" placeholder="Zip or City, State"/>
+          <input className="form-control" type="text" name="zipCode" placeholder="Zip or City, State" onChange={this.onFormChange} value={this.state.zipCode}/>
           <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
         </form>
 
