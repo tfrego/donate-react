@@ -8,6 +8,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import User from './components/User';
+import EmailForm  from './components/EmailForm';
 
 import './App.css';
 
@@ -139,18 +140,19 @@ class App extends Component {
               :
                 <ul className="navbar-nav">
                   <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
-                  <li className="nav-item"><Link to="/about/" className="nav-link">About</Link></li>
-                  <li className="nav-item"><Link to="/dashboard/" className="nav-link">Create a Wish List</Link></li>
-                  <li className="nav-item"><Link to="/dashboard/" className="nav-link">Post a Gift</Link></li>
+                  <li className="nav-item"><Link to="/about" className="nav-link">About</Link></li>
+                  <li className="nav-item"><Link to="/dashboard" className="nav-link">Create a Wish List</Link></li>
+                  <li className="nav-item"><Link to="/dashboard" className="nav-link">Post a Gift</Link></li>
                   <li><button type="button" className="btn btn-primary" onClick={this.login}>LOG IN</button></li>
                 </ul>
                 }
             </nav>
             <Switch>
               <Route path='/' exact component={Home} />
-              <Route path='/about/' component={About} />
-              <Route path='/dashboard/' render={() => <Dashboard user={this.state.user} />} />
-              <Route path="/:user" component={User} />
+              <Route path='/about' component={About} />
+              <Route path='/dashboard' render={() => <Dashboard user={this.state.user} />} />
+              <Route path="/:user" exact component={User} />
+              <Route path="/email/:emailUser" component={EmailForm} />
             </Switch>
           </div>
         </Router>

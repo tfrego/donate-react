@@ -70,25 +70,25 @@ class ItemForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} name="new-item-form" id="new-item-form">
+      <form onSubmit={this.onSubmit} className="form-inline" name="new-item-form" id="new-item-form">
         <div>
           <label className="new-item-form--label" htmlFor="title">Title</label>
-          <input name="title" placeholder="title" onChange={this.onFormChange} value={this.state.title} />
+          <input className="form-control mr-sm-2" type="text" name="title" placeholder="title" onChange={this.onFormChange} value={this.state.title} />
         </div>
         <div>
           <label className="new-item-form--label" htmlFor="category">Category</label>
-          <select name="category" placeholder="select" onChange={this.onFormChange} value={this.state.category}>
+          <select className="form-control" name="category" placeholder="select" onChange={this.onFormChange} value={this.state.category}>
             <option value="" defaultValue disabled>Please select</option>
             {CATEGORY_LIST.map((value, index) => <option key={index} value={value}>{value}</option>)}
           </select>
         </div>
         <div>
           <label className="new-item-form--label" htmlFor="description">Description</label>
-          <textarea name="description" placeholder="description" onChange={this.onFormChange} value={this.state.description} />
+          <textarea className="form-control" name="description" placeholder="description" onChange={this.onFormChange} value={this.state.description} />
         </div>
         <div>
           <label className="new-item-form--label" htmlFor="qty">Quantity</label>
-          <input name="qty" placeholder="qty" onChange={this.onFormChange} value={this.state.qty} />
+          <input className="form-control mr-sm-2" type="text" name="qty" placeholder="qty" onChange={this.onFormChange} value={this.state.qty} />
         </div>
         {this.state.type === "offers" ?
           <div>

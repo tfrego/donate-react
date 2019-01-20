@@ -15,6 +15,7 @@ class User extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match.params);
     axios.get(URL + 'users/' + this.props.match.params.user)
       .then((response) => {
         console.log(response);

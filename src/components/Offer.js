@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import EmailForm from './EmailForm';
 
 import './Offer.css';
 
 const Offer = (props) => {
-  const { title, description, image, qty } = props;
+  const { userId, title, description, image, qty } = props;
+
   return (
     <div className="offer card mb-3">
       <h4 class="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
@@ -13,9 +17,9 @@ const Offer = (props) => {
         <div className="overlay">
             <div className="rotate">
                 <p className="group1">
-                    <a href="#">
+                    <Link to={`/${userId}`}>
                         <i className="far fa-envelope-open"></i>
-                    </a>
+                    </Link>
                 </p>
             </div>
           </div>
@@ -23,8 +27,7 @@ const Offer = (props) => {
 
       <p className="card-text">{description}</p>
       <p className="card-text">Quantity: {qty}</p>
-      <button className="btn btn-info">Connect</button>
-
+      <Link to={`/email/${userId}`}><button className="btn btn-info">Connect</button></Link>
     </div>
   );
 };
