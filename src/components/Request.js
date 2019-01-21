@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './Request.css';
 
 const Request = (props) => {
-  const { title, description, qty, userName, userId } = props;
+  const { title, description, qty, userName, userId, location } = props;
 
   return (
     <div className="request">
@@ -15,6 +15,11 @@ const Request = (props) => {
       <p>Quantity: {qty}</p>
       <p>Posted By:</p>
         <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
+      {location ?
+        <p>{location.cityState}</p>
+      :
+        null
+      }
     </div>
   )
 }
