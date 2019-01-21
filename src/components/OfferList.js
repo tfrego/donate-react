@@ -7,6 +7,7 @@ import './OfferList.css';
 const OfferList = (props) => {
   const itemList = props.items.map((item) => {
     return <Offer key={item.id}
+            userLocation={props.userLocation}
             {...item} />
   });
 

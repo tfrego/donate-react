@@ -21,7 +21,7 @@ class ItemForm extends Component {
       qty: this.props.qty || '',
       selectedFile: null,
       zipCode: '',
-      location: {},
+      location:  null,
     };
   }
 

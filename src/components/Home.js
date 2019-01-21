@@ -4,7 +4,6 @@ import axios from 'axios';
 import RequestList from './RequestList';
 import OfferList from './OfferList';
 import SearchBar from './SearchBar';
-import User from './User';
 import './Home.css';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
@@ -18,8 +17,6 @@ class Home extends Component {
       requestMasterList: [],
       offerList: [],
       offerMasterList: [],
-      userList: [],
-      selectedUser: undefined,
     };
   }
 
@@ -63,26 +60,7 @@ class Home extends Component {
         this.setState({
           errorMessage: error.message,
         })
-      });
-    axios.get(URL + 'users/')
-      .then((response) => {
-        console.log(response);
-        const users = response.data.map((user) => {
-          const newUser = {
-            ...user,
-          }
-          return newUser;
-        });
-        this.setState({
-          userList: users,
-        });
       })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({
-          errorMessage: error.message,
-        })
-      });
   }
 
   searchRequestList = (value) => {
@@ -109,21 +87,7 @@ class Home extends Component {
     })
   }
 
-  onSelectUser = (userId) => {
-    console.log(userId);
-    const userSelected = this.state.userList.find((user) => {
-      return user.uid === userId;
-    });
-    console.log(userSelected);
-    if (userSelected) {
-      this.setState({ selectedUser: userSelected });
-    }
-    console.log(this.state);
-  }
-
   render() {
-    const { selectedUser } = this.state;
-    const userDetails = selectedUser ? <User user={selectedUser} /> : '';
 
     return (
       <div>
@@ -140,21 +104,15 @@ class Home extends Component {
           <SearchBar onSearchCallback={this.searchRequestList} />
           <RequestList
             items={this.state.requestList}
-            selectUserCallback={this.onSelectUser} />
-            {this.state.selectedUser ?
-              <div className="user-details">
-                {userDetails}
-              </div>
-            :
-              null
-            }
-
+            userLocation={this.props.userLocation} />
         </section>
         <section className="lists">
           <h2>Donate List</h2>
           <p>View new and gently used items available to be donated</p>
           <SearchBar onSearchCallback={this.searchOfferList} />
-          <OfferList items={this.state.offerList} />
+          <OfferList
+            items={this.state.offerList}
+            userLocation={this.props.userLocation} />
         </section>
       </div>
     )

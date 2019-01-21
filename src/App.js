@@ -17,7 +17,7 @@ class App extends Component {
     super();
     this.state = {
       user: null,
-      location: {},
+      location: null,
       zipCode: '',
       userRequests: null,
     }
@@ -59,6 +59,7 @@ class App extends Component {
         console.log('Location', position);
         this.setState({ location: position.coords });
         console.log(this.state);
+        localStorage.setItem('location', JSON.stringify(position.coords))
       }
 
       navigator.geolocation.getCurrentPosition(geoSuccess)
@@ -161,7 +162,7 @@ class App extends Component {
                 }
             </nav>
             <Switch>
-              <Route path='/' exact component={Home} />
+              <Route path='/' exact render={() => <Home userLocation={this.state.location} />} />
               <Route path='/about' component={About} />
               <Route path='/dashboard' render={() => <Dashboard user={this.state.user} />} />
               <Route path="/:user" exact component={User} />

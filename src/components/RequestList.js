@@ -7,7 +7,7 @@ import './RequestList.css';
 const RequestList = (props) => {
   const itemList = props.items.map((item) => {
     return <Request key={item.id}
-            selectUserCallback={props.selectUserCallback}
+            userLocation={props.userLocation}
             {...item} />
   });
 

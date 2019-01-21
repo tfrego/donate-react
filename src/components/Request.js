@@ -2,11 +2,23 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import geolib from 'geolib';
 
 import './Request.css';
 
 const Request = (props) => {
-  const { title, description, qty, userName, userId, location } = props;
+  const { title, description, qty, userName, userId, location, userLocation } = props;
+
+  let distance = null;
+
+  if (location && userLocation) {
+    console.log(userLocation);
+    console.log(location);
+    distance = (geolib.getDistance(
+      {latitude: userLocation.latitude, longitude: userLocation.longitude},
+      {latitude: location.lat, longitude: location.lng}
+    )/1609.34).toFixed(2);
+  }
 
   return (
     <div className="request">
@@ -15,11 +27,12 @@ const Request = (props) => {
       <p>Quantity: {qty}</p>
       <p>Posted By:</p>
         <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
-      {location ?
         <p>{location.cityState}</p>
-      :
-        null
-      }
+        {distance < 20 && distance ?
+          <p>({distance} miles)</p>
+        :
+          null
+        }
     </div>
   )
 }
