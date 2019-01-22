@@ -49,8 +49,7 @@ class EmailForm extends Component {
     const apiPayLoad = {
       service_id: 'default_service',
       template_id: 'contact_form',
-      user_id: 'user_ANisyVtgRIFgbNzAuhqkB'
-,
+      user_id: 'user_ANisyVtgRIFgbNzAuhqkB',
       template_params: this.state,
     };
     console.log('PayLoad', apiPayLoad);
