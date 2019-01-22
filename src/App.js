@@ -79,33 +79,12 @@ class App extends Component {
       .then((response) => {
         console.log(response);
         const { lat, lng } = response.data.results[0].geometry.location;
-        console.log(lat, lng);
-        this.setState({ location: response.data.results[0].geometry.location});
-      })
-      .catch((error) => {
-        console.log(error.message);
         this.setState({
-          errorMessage: error.message,
-        })
-      });
-  }
-
-  getUser = (userId) => {
-    const url = process.env.REACT_APP_BACKEND_API_BASE_URL;
-
-    axios.get(url + 'requests/user/' + userId)
-      .then((response) => {
-        console.log(response);
-        const requests = response.data.map((item) => {
-          const newRequest = {
-            ...item,
+          location: {
+            latitude: lat,
+            longitude: lng,
           }
-          return newRequest;
         });
-        this.setState({
-          userRequests: requests,
-        });
-        console.log(this.state);
       })
       .catch((error) => {
         console.log(error.message);
@@ -124,7 +103,6 @@ class App extends Component {
     this.setState(updatedState);
     console.log(this.state);
   }
-
 
   render() {
     return (

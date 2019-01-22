@@ -23,6 +23,12 @@ class User extends Component {
         console.log(user);
         this.setState({ user: user });
       })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
     axios.get(URL + 'requests/user/' + this.props.match.params.user)
       .then((response) => {
         console.log(response);
