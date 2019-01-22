@@ -3,7 +3,7 @@ import axios from 'axios';
 import './EmailForm.css';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
-const EMAIL_URL = process.env.REACT_APP_EMAILJS_BASE_URL;
+const EMAIL_ID = process.env.REACT_APP_EMAIL_ID;
 
 class EmailForm extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class EmailForm extends Component {
       subject: '',
       from_email: '',
       message: '',
-    };
+    }
   }
 
   componentDidMount() {
@@ -45,35 +45,39 @@ class EmailForm extends Component {
   }
 
   onSubmit = (event) => {
-    // event.preventDefault();
-    // const apiPayLoad = {
-    //   service_id: 'default_service',
-    //   template_id: 'contact_form',
-    //   user_id: process.env.REACT_APP_EMAILJS_USER_ID,
-    //   template_params: this.state,
-    // };
-    // axios.post(EMAIL_URL, apiPayLoad)
-    //   .then((response) => {
-    //     console.log('API RESPONSE SUCCESS', response);
-    //   })
-    //   .catch((error) => {
-    //     this.setState({
-    //       errorMessage: error.message,
-    //     })
-    //   });
+    event.preventDefault();
+    const apiPayLoad = {
+      service_id: 'default_service',
+      template_id: 'contact_form',
+      user_id: 'user_ANisyVtgRIFgbNzAuhqkB'
+,
+      template_params: this.state,
+    };
+    console.log('PayLoad', apiPayLoad);
+    console.log(URL);
+    console.log(EMAIL_ID);
+    axios.post('https://api.emailjs.com/api/v1.0/email/send', apiPayLoad)
+      .then((response) => {
+        console.log('API RESPONSE SUCCESS', response);
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message,
+        })
+      });
 
-    // this.setState({
-    //   to_email: '',
-    //   subject: '',
-    //   from_email: '',
-    //   message: '',
-    // })
+    this.setState({
+      to_email: '',
+      subject: '',
+      from_email: '',
+      message: '',
+    })
   }
 
 
   render() {
     return (
-      <form className="email-form" id="contact-form">
+      <form onSubmit={this.onSubmit} className="email-form" id="contact-form">
         <input type="hidden" name="to_email" value={this.state.to_email}/>
 
         <div className="form-group">
