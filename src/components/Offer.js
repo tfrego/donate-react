@@ -21,29 +21,35 @@ const Offer = (props) => {
 
   return (
     <div className="offer card mb-3">
-      <h4 className="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
-      <div className="hovereffect">
-        {image ? <img src={image} alt={title} /> : null }
-        <div className="overlay">
+    {distance < 20 ?
+      <div>
+        <h4 className="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
+        <div className="hovereffect">
+          {image ? <img src={image} alt={title} /> : null }
+          <div className="overlay">
             <div className="rotate">
-                <p className="group1">
-                    <Link to={`/email/${userId}`}>
-                        <i className="far fa-envelope-open"></i>
-                    </Link>
-                </p>
+              <p className="group1">
+                <Link to={`/email/${userId}`}>
+                  <i className="far fa-envelope-open"></i>
+                </Link>
+              </p>
             </div>
           </div>
         </div>
-
-      <p className="card-text">Description: {description}</p>
-      <p className="card-text">Quantity: {qty}</p>
-      <p>{location.cityState} </p>
-      {distance < 20 && distance ?
-        <p>({distance} miles)</p>
-      :
-        null
+        <p className="card-text">Description: {description}</p>
+        <p className="card-text">Quantity: {qty}</p>
+        <p>{location.cityState} </p>
+        {distance ?
+          <p>({distance} miles)</p>
+        :
+          null
+        }
+        <Link to={`/email/${userId}`}><button className="btn btn-info">Connect</button></Link>
+      </div>
+    :
+      null
       }
-      <Link to={`/email/${userId}`}><button className="btn btn-info">Connect</button></Link>
+
     </div>
   );
 };

@@ -22,17 +22,23 @@ const Request = (props) => {
 
   return (
     <div className="request">
-      <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
-      <p>Description: {description}</p>
-      <p>Quantity: {qty}</p>
-      <p>Posted By:</p>
-        <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
+    {distance < 20 ?
+      <div>
+        <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
+        <p>Description: {description}</p>
+        <p>Quantity: {qty}</p>
+        <p>Posted By:</p>
+          <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
         <p>{location.cityState}</p>
-        {distance < 20 && distance ?
+        {distance ?
           <p>({distance} miles)</p>
         :
           null
         }
+      </div>
+    :
+      null
+      }
     </div>
   )
 }
