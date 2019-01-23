@@ -17,11 +17,11 @@ class ItemForm extends Component {
       title: this.props.title || '',
       category: this.props.category || '',
       description: this.props.description || '',
-      image: '',
+      image: this.props.image || '',
       qty: this.props.qty || '',
       selectedFile: null,
       zipCode: '',
-      location:  null,
+      location:  this.props.location || null,
     };
   }
 

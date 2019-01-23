@@ -163,6 +163,36 @@ class Dashboard extends Component {
       })
   }
 
+  updateItem = (item, itemId) => {
+    console.log('Item', item);
+    console.log('Id', itemId)
+    if (item.type === "requests") {
+      const requests = this.state.requestList;
+      const request = requests.find((request) => {
+        return request.id === itemId;
+      })
+
+      const index = requests.indexOf(request);
+      requests[index] = item;
+      this.setState({ requestList: requests });
+
+    } else if (item.type === "offers") {
+      console.log(item)
+      const offers = this.state.offerList;
+      console.log(offers);
+      const offer = offers.find((offer) => {
+        return offer.id === itemId;
+      })
+      console.log(offer)
+      const index = offers.indexOf(offer);
+      console.log(index)
+      offers[index] = item;
+      console.log(offers)
+      this.setState({ offerList: offers });
+      console.log(this.state);
+    }
+  }
+
   itemFulfilled = (itemId, type) => {
     if (type === "requests") {
       const requests = this.state.requestList;
@@ -202,6 +232,7 @@ class Dashboard extends Component {
             items={this.state.requestList}
             deleteItemCallback={this.deleteItem}
             itemFullfilledCallback={this.itemFulfilled}
+            itemUpdatedCallback={this.updateItem}
             type="requests" />
         </section>
         <section className="dashboard">
@@ -219,6 +250,7 @@ class Dashboard extends Component {
             items={this.state.offerList}
             deleteItemCallback={this.deleteItem}
             itemFullfilledCallback={this.itemFulfilled}
+            itemUpdatedCallback={this.updateItem}
             type="offers" />
         </section>
       </div>

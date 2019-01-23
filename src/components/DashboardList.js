@@ -10,6 +10,7 @@ const DashboardList = (props) => {
     return <DashboardItem key={item.id}
             deleteItemCallback={props.deleteItemCallback}
             itemFullfilledCallback={props.itemFullfilledCallback}
+            itemUpdatedCallback={props.itemUpdatedCallback}
             type={props.type}
             {...item} />
   });

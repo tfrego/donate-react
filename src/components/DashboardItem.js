@@ -39,6 +39,7 @@ class DashboardItem extends Component {
         this.setState({
           editItem: false,
         })
+        this.props.itemUpdatedCallback(item, this.props.id);
       })
       .catch( (error) => {
         this.setState({
