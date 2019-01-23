@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import './Matches.css';
+
 const Match = (props) => {
   const { title, description, image, qty, userName, userId } = props;
   return (
@@ -11,7 +13,7 @@ const Match = (props) => {
         <td>{qty}</td>
         <td>{image ? <img src={image} alt={title} className="dashboard-img" /> : null }</td>
         <td>{userName}</td>
-        <td><Link to={`/email/${userId}`}><i className="far fa-envelope-open"></i></Link></td>
+        <td><Link to={`/email/${userId}`}><i className="far fa-envelope-open contact"></i></Link></td>
       </tr>
   );
 };

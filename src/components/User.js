@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import WishList from './WishList';
+import { Link } from 'react-router-dom';
 
 import './User.css';
 
@@ -56,7 +57,12 @@ class User extends Component {
 
     return (
       <div className="main user">
-        <h3>Meet {this.state.user.name}</h3>
+        <h3>Meet {this.state.user.name} <Link to={`/email/${this.state.user.uid}`}><i className="far fa-envelope-open contact"></i></Link></h3>
+        {this.state.user.photo ?
+          <img className="profile-photo" src={this.state.user.photo} alt="user" />
+        :
+          null
+        }
         <p>About: {this.state.user.about}</p>
         <h3>Wishlist</h3>
           <WishList items={this.state.userRequests} />
