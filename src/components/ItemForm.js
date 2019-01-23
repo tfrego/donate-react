@@ -83,7 +83,7 @@ class ItemForm extends Component {
 
     const { title, category, description, location } = this.state;
 
-    if (title === '' || category === '' || description === '' || location === '') return;
+    if (title === '' || category === '' || description === '' || location === null) return;
 
     if (file) {
       const storageRef = firebase.storage().ref();

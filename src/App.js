@@ -109,16 +109,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <form className="form-inline form-location">
-          <button className="btn btn-info" type="button" onClick={this.getLocation}><i className="fa fa-map-marker"></i> Find My Location</button>
-          <span>  or  </span>
-          <input className="form-control" type="text" name="zipCode" placeholder="Zip or City, State" onChange={this.onFormChange} value={this.state.zipCode}/>
-          <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
-        </form>
-
         <Router>
           <div>
-            <nav className="navbar navbar-fixed-top">
+            <nav className="navbar">
+            <form className="form-inline form-location">
+              <button className="btn btn-info" type="button" onClick={this.getLocation}><i className="fa fa-map-marker"></i> Find My Location</button>
+              <span>  or  </span>
+              <input className="form-control" type="text" name="zipCode" placeholder="Zip or City, State" onChange={this.onFormChange} value={this.state.zipCode}/>
+              <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
+            </form>
               {this.state.user ?
                 <ul className="navbar-nav">
                   <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>

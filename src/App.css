@@ -88,9 +88,13 @@ li {
   color: white;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 .navbar-nav {
   position: absolute;
-  top: 40%;
+  top: 20px;
   right: 20px;
   list-style: none;
   text-align: center;
@@ -147,8 +151,6 @@ li {
 }
 
 .form {
-  padding: 3rem 3rem;
   width: 50%;
-  margin: auto;
   opacity: .75;
 }

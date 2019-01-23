@@ -1,29 +1,19 @@
 .offer {
   margin: 2rem 2rem;
+  padding-bottom: 1.25rem;
   border: solid;
   border-width: thin;
   border-color: gray;
-  padding: 2rem 2rem;
   width: 310px;
+  height: auto;
   border-radius: 5px;
 }
-
-/*.card-header {
-  margin-top: 0;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 0;
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.card-text {
-  padding-left: 2rem;
-}*/
 
 .offer img {
   max-width: 300px;
   max-height: 300px;
+  margin: auto;
+  padding-bottom: .75rem;
 }
 
 .hovereffect {
@@ -67,11 +57,11 @@
 .hovereffect a.info {
   display: inline-block;
   text-decoration: none;
-  padding: 7px 14px;
+  /*padding: 7px 14px;*/
   text-transform: uppercase;
   color: #fff;
   border: 1px solid #fff;
-  margin: 50px 0 0 0;
+  /*margin: 50px 0 0 0;*/
   background-color: transparent;
 }
 
@@ -107,8 +97,6 @@
 .group1 {
   top: 50%;
 }
-
-
 
 
 .hovereffect p a {

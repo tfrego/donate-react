@@ -113,6 +113,7 @@ class Home extends Component {
             items={this.state.requestList}
             userLocation={this.props.userLocation} />
         </section>
+
         <section className="lists">
           <h2>Donate List</h2>
           <p>View new and gently used items available to be donated.</p>

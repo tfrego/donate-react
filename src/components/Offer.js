@@ -20,36 +20,41 @@ const Offer = (props) => {
   }
 
   return (
-    <div className="offer card mb-3">
+    <div className="offer card">
     {distance < 20 ?
       <div>
-        <h4 className="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
-        <div className="hovereffect">
-          {image ? <img src={image} alt={title} /> : null }
-          <div className="overlay">
-            <div className="rotate">
-              <p className="group1">
-                <Link to={`/email/${userId}`}>
-                  <i className="far fa-envelope-open"></i>
-                </Link>
-              </p>
+        <div>
+          <h4 className="card-header">{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
+        </div>
+        <div className="card-body">
+          <div className="hovereffect">
+            {image ? <img src={image} alt={title} /> : null }
+            <div className="overlay">
+              <div className="rotate">
+                <p className="group1">
+                  <Link to={`/email/${userId}`}>
+                    <i className="far fa-envelope-open"></i>
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <p className="card-text">Description: {description}</p>
-        <p className="card-text">Quantity: {qty}</p>
-        <p>{location.cityState} </p>
-        {distance ?
-          <p>({distance} miles)</p>
-        :
-          null
-        }
-        <Link to={`/email/${userId}`}><button className="btn btn-info">Connect</button></Link>
-      </div>
+        <div className="card-body">
+          <h5 className="card-title">Description: {description}</h5>
+          <h6 className="card-subtitle text-muted">Quantity: {qty}</h6>
+          <h6 className="card-subtitle text-muted">{location.cityState}</h6>
+          {distance ?
+            <h6 className="card-subtitle text-muted">({distance} miles)</h6>
+          :
+            null
+          }
+        </div>
+      <Link to={`/email/${userId}`}><button className="btn btn-info">Connect</button></Link>
+    </div>
     :
       null
-      }
-
+    }
     </div>
   );
 };

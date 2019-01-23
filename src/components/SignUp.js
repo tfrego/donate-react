@@ -86,8 +86,17 @@ class SignUp extends Component {
     axios.post(URL + `users/`, apiPayLoad)
       .then((response) => {
         console.log('API RESPONSE SUCCESS', response);
+        this.setState({
+          user: null,
+          uid: null,
+          name: '',
+          email: '',
+          about: '',
+          photo: '',
+          zipCode: '',
+          location: null,
+        })
       })
-      
       .catch((error) => {
         this.setState({
           errorMessage: error.message,
@@ -98,7 +107,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="form-inline">
+      <form onSubmit={this.onSubmit} className="form">
         <div>
           <button type="button" className="btn btn-primary" onClick={this.login}>Authenticate With <i class="fab fa-facebook-square"></i></button>
           {this.state.photo ?
@@ -122,11 +131,11 @@ class SignUp extends Component {
         <div>
           <label className="new-item-form--label" htmlFor="location">Location</label>
           <input className="form-control" type="text" name="zipCode" placeholder="Zip Code" onChange={this.onFormChange} value={this.state.zipCode}/>
-          <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
+          <button type="submit" onClick={this.zipCodeFinder}>Save Location</button>
         </div>
         <div>
-          <input type="submit" name="submit" value="Submit"/>
-          <button type="button" onClick={() => this.props.cancelFormCallback()}>Cancel</button>
+          <input type="submit" name="submit" value="Submit" className="btn btn-outline-info"/>
+          <button type="button" className="btn btn-outline-danger" onClick={() => this.props.cancelFormCallback()}>Cancel</button>
         </div>
       </form>
     );

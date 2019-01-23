@@ -12,7 +12,7 @@ const RequestList = (props) => {
   });
 
   return (
-    <div className="request">
+    <div className="request-list">
       {itemList}
     </div>
   )

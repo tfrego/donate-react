@@ -26,10 +26,12 @@ const Request = (props) => {
       <div>
         <h4>{title.charAt(0).toUpperCase() + title.slice(1)}</h4>
         <p>Description: {description}</p>
-        <p>Quantity: {qty}</p>
+        <h6 className="card-subtitle text-muted">Quantity: {qty}</h6>
+        <h6 className="card-subtitle text-muted">{location.cityState}</h6>
         <p>Posted By:</p>
           <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
-        <p>{location.cityState}</p>
+
+
         {distance ?
           <p>({distance} miles)</p>
         :

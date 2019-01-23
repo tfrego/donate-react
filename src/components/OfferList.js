@@ -12,7 +12,7 @@ const OfferList = (props) => {
   });
 
   return (
-    <div className="offerlist">
+    <div className="offer-list">
       {itemList}
     </div>
   )
