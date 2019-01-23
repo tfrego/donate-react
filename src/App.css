@@ -52,8 +52,9 @@ li {
 }
 
 .btn-info:hover {
-  background-color: #78C2AD;
-  border-color: #78C2AD;
+  opacity: .75;
+  background-color: #A60000;
+  border-color: #A60000;
 }
 
 .btn-primary {

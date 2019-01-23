@@ -2,6 +2,7 @@
   "name": "donate-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tfrego.github.io/donate-react/"
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
     "@fortawesome/free-solid-svg-icons": "^5.6.3",
@@ -12,6 +13,8 @@
     "emailjs-com": "^2.3.2",
     "firebase": "^5.7.2",
     "geolib": "^2.0.24",
+    "gh-pages": "^2.0.1",
+    "jw-react-pagination": "^1.0.7",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
@@ -23,6 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
