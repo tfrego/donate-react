@@ -7,12 +7,14 @@ class ProfileForm extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
-      about: '',
-      photo: '',
+      uid: this.props.uid || '',
+      name: this.props.name || '',
+      email: this.props.email || '',
+      about: this.props.about || '',
+      photo: this.props.photo || '',
+      selectedFile: null,
       zipCode: '',
-      location: null,
+      location: this.props.location || null,
     };
   }
 
@@ -84,7 +86,7 @@ class ProfileForm extends Component {
 
         snapshot.ref.getDownloadURL().then((downloadUrl) => {
           console.log('File available at', downloadUrl);
-          this.setState({ image: downloadUrl.toString() });
+          this.setState({ photo: downloadUrl.toString() });
           console.log(this.state);
 
           this.props.postProfileCallback(this.state);
@@ -116,7 +118,7 @@ class ProfileForm extends Component {
           <input type="file" onChange={this.fileChangedHandler} />
         </div>
         <div>
-          <label className="form-inline" htmlFor="location">Location</label>
+          <label className="form-inline" htmlFor="zipCode">Location</label>
           <input className="form-control" type="text" name="zipCode" placeholder="Zip Code" onChange={this.onFormChange} value={this.state.zipCode}/>
           <button type="submit" onClick={this.zipCodeFinder}>Save Location</button>
         </div>

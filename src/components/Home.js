@@ -96,12 +96,12 @@ class Home extends Component {
           <div>
             <p className="home-text">
             Connect directly with those in need to donate your new and gently used items. Gift a wish!</p>
-            <Link to='/post'><button type="button" className="btn btn-primary"><i class="fas fa-gift"></i></button></Link>
+            <Link to='/post'><button type="button" className="btn btn-primary"><i className="fas fa-gift"></i></button></Link>
           </div>
           <div>
             <p className="home-text">
             Are you a family in need? Post your wish list and get connected with someone in your community.</p>
-            <Link to='/post'><button type="button" className="btn btn-primary"><i class="fas fa-list-alt"></i></button></Link>
+            <Link to='/post'><button type="button" className="btn btn-primary"><i className="fas fa-list-alt"></i></button></Link>
           </div>
         </section>
 

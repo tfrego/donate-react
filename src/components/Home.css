@@ -7,7 +7,7 @@
   background-size: cover;
   height: 450px;
   text-align: center;
-  padding: 10% 20%;
+  padding: 11% 20%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

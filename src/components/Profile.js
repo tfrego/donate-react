@@ -3,6 +3,7 @@ import axios from 'axios';
 import { auth } from './../firebase';
 
 import ProfileForm from './ProfileForm';
+import './Profile.css';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
@@ -12,7 +13,9 @@ class Profile extends Component {
 
     this.state = {
       user: JSON.parse(localStorage.getItem('user')),
-      edit: false,
+      editProfile: false,
+      id: '',
+      uid: '',
       name: '',
       email: '',
       about: '',
@@ -40,6 +43,8 @@ class Profile extends Component {
       this.setState({
         user: user,
         editProfile: false,
+        id: user.id,
+        uid: user.uid,
         name: user.name,
         email: user.email,
         about: user.about,
@@ -64,19 +69,16 @@ class Profile extends Component {
     this.setState({ editProfile: false });
   }
 
-  editProfile = (item) => {
-    console.log(item)
+  editProfile = (userProfile) => {
+    console.log(userProfile)
     const apiPayLoad = {
-      ...item,
-      userId: this.state.user.uid,
-      userName: this.state.user.displayName,
-      status: 'active',
+      ...userProfile,
     };
-    axios.put(URL + item.type + "/" + this.props.id, apiPayLoad)
+    axios.put(URL + "users/" + this.state.id, apiPayLoad)
       .then((response) => {
         console.log(response);
         this.setState({
-          editItem: false,
+          editProfile: false,
         })
       })
       .catch( (error) => {
@@ -89,13 +91,12 @@ class Profile extends Component {
   render() {
     return (
       <div className="main">
-        <h3>My Profile</h3>
         {this.state.photo ?
-          <img className="user-profile" src={this.state.photo} alt="user" />
+          <img className="profile-photo" src={this.state.photo} alt="user" />
         :
           null
         }
-        <p>Name: {this.state.name}</p>
+        <h3>{this.state.name}</h3>
         <p>Email: {this.state.email}</p>
         <p>About: {this.state.about}</p>
         <p>Location: {this.state.location.cityState} </p>
@@ -104,7 +105,7 @@ class Profile extends Component {
           <ProfileForm
             postProfileCallback={this.editProfile}
             cancelFormCallback={this.onCancelClick}
-            {...this.props}   />
+            {...this.state}   />
         :
           null
         }

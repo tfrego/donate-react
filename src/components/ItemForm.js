@@ -81,6 +81,10 @@ class ItemForm extends Component {
     console.log('Selected file', this.state.selectedFile);
     const file = this.state.selectedFile;
 
+    const { title, category, description, location } = this.state;
+
+    if (title === '' || category === '' || description === '' || location === '') return;
+
     if (file) {
       const storageRef = firebase.storage().ref();
       const uuidv1 = require('uuid/v1');
