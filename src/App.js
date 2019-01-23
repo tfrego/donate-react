@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import { auth, provider } from './firebase.js';
 import axios from 'axios';
 
@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Dashboard from './components/Dashboard';
 import User from './components/User';
 import EmailForm  from './components/EmailForm';
+import PleaseLogIn from './components/PleaseLogIn';
 
 import './App.css';
 
@@ -140,6 +141,13 @@ class App extends Component {
               <Route path='/' exact render={() => <Home userLocation={this.state.location} />} />
               <Route path='/about' component={About} />
               <Route path='/signup' component={SignUp} />
+              <Route exact path="/post" render={() => (
+                this.state.user ? (
+                  <Redirect to="/dashboard"/>
+                ) : (
+                  <PleaseLogIn/>
+                )
+              )}/>
               <Route path='/profile' render={() => <Profile user={this.state.user} />} />
               <Route path='/dashboard' render={() => <Dashboard user={this.state.user} />} />
               <Route path='/:user' exact component={User} />

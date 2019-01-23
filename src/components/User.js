@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import WishList from './WishList';
 
+import './User.css';
+
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
 class User extends Component {
@@ -53,7 +55,7 @@ class User extends Component {
   render() {
 
     return (
-      <div className="main">
+      <div className="main user">
         <h3>Meet {this.state.user.name}</h3>
         <p>About: {this.state.user.about}</p>
         <h3>Wishlist</h3>

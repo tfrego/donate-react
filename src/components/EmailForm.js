@@ -76,26 +76,28 @@ class EmailForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="form" id="contact-form">
-        <input type="hidden" name="to_email" value={this.state.to_email}/>
+      <div className="email">
+        <form onSubmit={this.onSubmit} className="form" id="contact-form">
+          <input type="hidden" name="to_email" value={this.state.to_email}/>
 
-        <div className="form-group">
-          <label htmlFor="subject">Subject</label>
-          <input className="form-control" type="text" name="subject" onChange={this.onFormChange} value={this.state.subject} />
-        </div>
+          <div className="form-group">
+            <label htmlFor="subject">Subject</label>
+            <input className="form-control" type="text" name="subject" onChange={this.onFormChange} value={this.state.subject} />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="from_email">From Email</label>
-          <input className="form-control" type="text" name="from_email" onChange={this.onFormChange} value={this.state.from_email} />
-        </div>
+          <div className="form-group">
+            <label htmlFor="from_email">From Email</label>
+            <input className="form-control" type="text" name="from_email" onChange={this.onFormChange} value={this.state.from_email} />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="message">Message</label>
-          <textarea className="form-control" rows="4" name="message" onChange={this.onFormChange} value={this.state.message}/>
-        </div>
+          <div className="form-group">
+            <label htmlFor="message">Message</label>
+            <textarea className="form-control" rows="4" name="message" onChange={this.onFormChange} value={this.state.message}/>
+          </div>
 
-        <button type="submit" className="btn btn-primary" > Send </button>
-      </form>
+          <button type="submit" className="btn btn-primary" > Send </button>
+        </form>
+      </div>
 
     )
   }
