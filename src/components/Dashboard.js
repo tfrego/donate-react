@@ -163,6 +163,27 @@ class Dashboard extends Component {
       })
   }
 
+  itemFulfilled = (itemId, type) => {
+    if (type === "requests") {
+      const requests = this.state.requestList;
+      const request = requests.find((request) => {
+        return request.id === itemId;
+      })
+
+      requests.splice(requests.indexOf(request), 1);
+      this.setState({ requestList: requests})
+
+    } else if (type === "offers") {
+      const offers = this.state.offerList;
+      const offer = offers.find((offer) => {
+        return offer.id === itemId;
+      })
+
+      offers.splice(offers.indexOf(offer), 1);
+      this.setState({ offerList: offers})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -180,6 +201,7 @@ class Dashboard extends Component {
           <DashboardList
             items={this.state.requestList}
             deleteItemCallback={this.deleteItem}
+            itemFullfilledCallback={this.itemFulfilled}
             type="requests" />
         </section>
         <section className="dashboard">
@@ -196,6 +218,7 @@ class Dashboard extends Component {
           <DashboardList
             items={this.state.offerList}
             deleteItemCallback={this.deleteItem}
+            itemFullfilledCallback={this.itemFulfilled}
             type="offers" />
         </section>
       </div>

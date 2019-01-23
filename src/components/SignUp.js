@@ -87,6 +87,7 @@ class SignUp extends Component {
       .then((response) => {
         console.log('API RESPONSE SUCCESS', response);
       })
+      
       .catch((error) => {
         this.setState({
           errorMessage: error.message,

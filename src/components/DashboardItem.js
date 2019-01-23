@@ -47,6 +47,25 @@ class DashboardItem extends Component {
       })
   }
 
+  itemFulfilled = (id, type) => {
+    const apiPayLoad = {
+      ...this.props,
+      userId: this.state.user.uid,
+      userName: this.state.user.displayName,
+      status: 'inactive',
+    }
+    axios.put(URL + this.props.type + "/" + this.props.id, apiPayLoad)
+      .then((response) => {
+        console.log(response);
+        this.props.itemFullfilledCallback(id, type);
+      })
+      .catch( (error) => {
+        this.setState({
+          errorMessage: `Failure ${error.message}`,
+        })
+      })
+  }
+
   render() {
     const { id, title, category, description, image, qty, matches, type } = this.props;
 
@@ -68,6 +87,11 @@ class DashboardItem extends Component {
           {image ? <img src={image} alt={title} className="dashboard-img" /> : null }
           <button className="btn btn-outline-info" onClick={this.onEditClick}>Edit</button>
           <button className="btn btn-outline-danger" onClick={() => this.props.deleteItemCallback(id, type)}>Delete</button>
+          { type === "requests" ?
+            <button className="btn btn-primary" onClick={() => this.itemFulfilled(id, type)}>Received</button>
+          :
+            <button className="btn btn-primary" onClick={() => this.itemFulfilled(id, type)}>Donated</button>
+          }
           {this.state.editItem ?
             <ItemForm
               postItemCallback={this.editItem}

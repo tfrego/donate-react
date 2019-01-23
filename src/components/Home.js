@@ -21,7 +21,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get(URL + 'requests/')
+    axios.get(URL + 'requests/active')
       .then((response) => {
         console.log(response);
         const items = response.data.map((item) => {
@@ -41,7 +41,7 @@ class Home extends Component {
           errorMessage: error.message,
         })
       });
-    axios.get(URL + 'offers/')
+    axios.get(URL + 'offers/active')
       .then((response) => {
         console.log(response);
         const items = response.data.map((item) => {

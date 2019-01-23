@@ -11,7 +11,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      user: this.props.user || JSON.parse(localStorage.getItem('user')),
+      user: JSON.parse(localStorage.getItem('user')),
       edit: false,
       name: '',
       email: '',
@@ -35,7 +35,7 @@ class Profile extends Component {
     axios.get(URL + `users/${this.state.user.uid}`)
     .then((response) => {
       console.log(response);
-      const user = response.data
+      const user = response.data;
       console.log(user);
       this.setState({
         user: user,
