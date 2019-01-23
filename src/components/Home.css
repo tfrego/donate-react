@@ -8,6 +8,8 @@
   height: 450px;
   text-align: center;
   padding: 10% 20%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .lists h2 {
@@ -16,11 +18,12 @@
 
 .home-text {
   color: white;
-  margin: 2rem;
+  font-size: medium;
+  margin: 2rem 3rem;
 }
 
-.home-text h1 {
-  font-weight: bolder;
+.fas {
+  font-size: large;
 }
 
 .lists {

@@ -23,7 +23,7 @@
 }
 
 .form-location {
-  margin: 2rem 2rem;
+  margin: 2rem;
 }
 
 ul {
@@ -63,8 +63,8 @@ li {
 
 .btn-primary:hover {
   opacity: .75;
-  background-color: #D51C38;
-  border-color: #e96188;
+  background-color: #A60000;
+  border-color: #A60000;;
 }
 
 .btn-outline-info {
@@ -139,4 +139,14 @@ li {
 
 .fa-map-marker {
   color: #e96188;
+}
+
+.main {
+  padding: 3rem 3rem;
+}
+
+.form {
+  padding: 3rem 3rem;
+  width: 50%;
+  margin: auto;
 }

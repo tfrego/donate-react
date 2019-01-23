@@ -92,15 +92,21 @@ class Home extends Component {
     return (
       <div>
         <section className="home">
-          <p className="home-text">WANT TO CONNECT WITH A FAMILY IN NEED?</p>
-          <h1 className="home-text">GIFT A WISH</h1>
-          <p className="home-text">Search wish lists created by families and donation centers in your local communities.
-          Connect directly with those in need to donate your new and gently used items.</p>
-          <button type="button" className="btn btn-primary">LEARN MORE</button>
+          <div>
+            <p className="home-text">
+            Connect directly with those in need to donate your new and gently used items. Gift a wish!</p>
+            <button type="button" className="btn btn-primary"><i class="fas fa-gift"></i></button>
+          </div>
+          <div>
+            <p className="home-text">
+            Are you a family in need? Post your wish list and get connected with someone in your community.</p>
+            <button type="button" className="btn btn-primary"><i class="fas fa-list-alt"></i></button>
+          </div>
         </section>
+
         <section className="lists">
           <h2>Wish Lists</h2>
-          <p>View items needed by families and donation centers</p>
+          <p>Search wish lists created by families and donation centers in your local communities.</p>
           <SearchBar onSearchCallback={this.searchRequestList} />
           <RequestList
             items={this.state.requestList}
@@ -108,7 +114,7 @@ class Home extends Component {
         </section>
         <section className="lists">
           <h2>Donate List</h2>
-          <p>View new and gently used items available to be donated</p>
+          <p>View new and gently used items available to be donated.</p>
           <SearchBar onSearchCallback={this.searchOfferList} />
           <OfferList
             items={this.state.offerList}

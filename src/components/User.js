@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RequestList from './RequestList';
+import WishList from './WishList';
 
 const URL = process.env.REACT_APP_BACKEND_API_BASE_URL;
 
@@ -51,12 +51,13 @@ class User extends Component {
 
 
   render() {
+
     return (
-      <div>
+      <div className="main">
         <h3>Meet {this.state.user.name}</h3>
         <p>About: {this.state.user.about}</p>
-        <h4>{this.state.user.name}s Wishlist</h4>
-          <RequestList items={this.state.userRequests} />
+        <h3>Wishlist</h3>
+          <WishList items={this.state.userRequests} />
       </div>
     )
   }

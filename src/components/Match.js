@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Match = (props) => {
-  const { title, description, image, qty, userName } = props;
+  const { title, description, image, qty, userName, userId } = props;
   return (
       <tr className="matches">
         <td>{title.charAt(0).toUpperCase() + title.slice(1)}</td>
@@ -10,7 +11,7 @@ const Match = (props) => {
         <td>{qty}</td>
         <td>{image ? <img src={image} alt={title} className="dashboard-img" /> : null }</td>
         <td>{userName}</td>
-        <td></td>
+        <td><Link to={`/email/${userId}`}><i className="far fa-envelope-open"></i></Link></td>
       </tr>
   );
 };

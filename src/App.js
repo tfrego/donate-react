@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { auth, provider } from './firebase.js';
 import axios from 'axios';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import Home from './components/Home';
 import About from './components/About';
@@ -123,11 +122,8 @@ class App extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>
                   <li className="nav-item"><Link to='/about' className="nav-link">About</Link></li>
-                  <DropdownButton className="user-button nav-link" title={this.state.user.displayName}>
-                    <MenuItem eventKey="1"><Link to='/profile'>My Profile</Link></MenuItem>
-                    <MenuItem eventKey="2"><Link to='/dashboard'>My Items</Link></MenuItem>
-                  </DropdownButton>
-                  <li className="nav-item"></li>
+                  <li className="nav-item"><Link to='/profile' className="nav-link">My Profile</Link></li>
+                  <li className="nav-item"><Link to='/dashboard' className="nav-link">My Items</Link></li>
                   <li><img className="user-profile" src={this.state.user.photoURL} alt="user" /></li>
                   <li><button type="button" className="btn btn-primary" onClick={this.logout}>LOG OUT</button></li>
                 </ul>

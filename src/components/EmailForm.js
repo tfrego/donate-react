@@ -76,7 +76,7 @@ class EmailForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="email-form" id="contact-form">
+      <form onSubmit={this.onSubmit} className="form" id="contact-form">
         <input type="hidden" name="to_email" value={this.state.to_email}/>
 
         <div className="form-group">

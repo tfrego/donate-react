@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import firebase, { auth } from './../firebase';
+import { auth } from './../firebase';
 
 import ProfileForm from './ProfileForm';
 
@@ -88,7 +88,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <h3>My Profile</h3>
         {this.state.photo ?
           <img className="user-profile" src={this.state.photo} alt="user" />

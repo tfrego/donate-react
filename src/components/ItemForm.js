@@ -107,7 +107,7 @@ class ItemForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="form-inline" name="new-item-form" id="new-item-form">
+      <form onSubmit={this.onSubmit} className="form" name="new-item-form" id="new-item-form">
         <div>
           <label className="new-item-form--label" htmlFor="title">Title</label>
           <input className="form-control mr-sm-2" type="text" name="title" placeholder="title" onChange={this.onFormChange} value={this.state.title} />
@@ -137,11 +137,11 @@ class ItemForm extends Component {
         <div>
           <label className="new-item-form--label" htmlFor="location">Location</label>
           <input className="form-control" type="text" name="zipCode" placeholder="Zip Code" onChange={this.onFormChange} value={this.state.zipCode}/>
-          <button className="btn btn-info" type="submit" onClick={this.zipCodeFinder}>Go</button>
+          <button type="submit" onClick={this.zipCodeFinder}>Save Location</button>
         </div>
         <div>
-          <input type="submit" name="submit" value="Submit"/>
-          <button type="button" onClick={() => this.props.cancelFormCallback()}>Cancel</button>
+          <input type="submit" name="submit" value="Submit" className="btn btn-outline-info"/>
+          <button type="button" className="btn btn-outline-danger" onClick={() => this.props.cancelFormCallback()}>Cancel</button>
         </div>
       </form>
     );
