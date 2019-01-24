@@ -46,6 +46,18 @@ li {
   margin-left: .5rem;
 }
 
+.btn-info:active:focus {
+  background-color: inherit;
+  border-color: inherit;
+  outline: 0 !important;
+}
+
+.btn:focus {
+  background-color: #D3D3D3;
+  border-color: #D3D3D3;
+  outline: 0 !important;
+}
+
 .btn-info {
   background-color: #D3D3D3;
   border-color: #D3D3D3;
@@ -60,6 +72,12 @@ li {
 .btn-primary {
   background-color: #e96188;
   border-color: #e96188;
+}
+
+.btn-primary:active:focus {
+  background-color: inherit;
+  border-color: inherit;
+  outline: 0 !important;
 }
 
 .btn-primary:hover {
@@ -132,6 +150,10 @@ li {
   -webkit-transition: width .5s ease;
 }
 
+.nav-link:active {
+  text-decoration: none !important;
+}
+
 .nav-link:hover:after{
   width: 100%;
   left: 0;
@@ -153,4 +175,13 @@ li {
 .form {
   width: 50%;
   opacity: .75;
+  margin: auto;
+}
+
+.form label {
+  margin-top: .75rem;
+}
+
+.form .btn {
+  margin-top: 1rem;
 }

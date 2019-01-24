@@ -17,7 +17,7 @@ const Request = (props) => {
     distance = (geolib.getDistance(
       {latitude: userLocation.latitude, longitude: userLocation.longitude},
       {latitude: location.lat, longitude: location.lng}
-    )/1609.34).toFixed(2);
+    )/1609.34).toFixed(1);
   }
 
   return (
@@ -28,15 +28,14 @@ const Request = (props) => {
         <p>Description: {description}</p>
         <h6 className="card-subtitle text-muted">Quantity: {qty}</h6>
         <h6 className="card-subtitle text-muted">{location.cityState}</h6>
-        <p>Posted By:</p>
-          <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
-
-
         {distance ?
-          <p>({distance} miles)</p>
+          <h6 className="card-subtitle text-muted">({distance} miles)</h6>
         :
           null
         }
+        <p>Posted By:</p>
+          <Link to={`/${userId}`}><button className="btn btn-info">{userName}</button></Link>
+
       </div>
     :
       null

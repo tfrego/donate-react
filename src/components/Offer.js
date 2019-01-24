@@ -16,7 +16,7 @@ const Offer = (props) => {
     distance = (geolib.getDistance(
       {latitude: userLocation.latitude, longitude: userLocation.longitude},
       {latitude: location.lat, longitude: location.lng}
-    )/1609.34).toFixed(2);
+    )/1609.34).toFixed(1);
   }
 
   return (
